@@ -6,6 +6,40 @@
 
 本文分别提供人类用户与 AI 的操作流程。功能与恢复说明见 [README.zh-CN.md](README.zh-CN.md)。命令默认在项目根目录执行。npm / node 命令两平台通用；PowerShell 示例用于 Windows，bash 示例用于 Mac。
 
+## 桌面应用 + Chrome 插件一体安装（推荐）
+
+从 Actions 构建产物下载 **Epassword-Setup-1.1.0-win-x64.zip**、**Epassword-Setup-1.1.0-mac-x64.zip** 或 **Epassword-Setup-1.1.0-mac-arm64.zip**。完整解压到下载/临时目录，关闭 Epassword，然后：
+
+- Windows：双击 **install.cmd**。
+- Mac：在解压目录运行 **bash install.command**，或双击具有执行权限的安装入口。
+
+安装包自带运行时，**不需要 Node.js/npm**。一次运行会安装完整桌面程序和 Chrome 插件文件，创建 Windows 开始菜单快捷方式，并打开桌面程序、本地安装指引以及 Chrome 扩展管理页（已安装 Chrome 时）。
+
+默认安装目录：Windows 为 **%LOCALAPPDATA%/Programs/Epassword**，Mac 为 **~/Applications/Epassword**。桌面程序在 app/，插件在固定的 chrome-extension/ 子目录。真实 Excel 密码库请保存在安装目录之外。升级前的桌面与插件文件会保留在 previous-* 目录，不直接删除。
+
+**最后启用 Chrome 插件：** 打开 chrome://extensions，开启“开发者模式”，点击“加载已解压的扩展程序”，选择指引显示的 chrome-extension 固定目录。固定插件、解锁桌面密码库，在“设置与恢复 → 浏览器插件”生成配对码，并在 HTTPS 网页打开插件完成配对。升级后点击已有插件的“重新加载”。重启任一应用后重新配对。
+
+Chrome 不允许普通安装脚本在 Windows/macOS 静默启用未上架插件，因此脚本安装两个组件并引导完成浏览器确认，不修改个人浏览器配置、企业策略或系统安全设置。[Chrome 官方分发规则](https://developer.chrome.com/docs/extensions/how-to/distribute)。
+
+源码安装：先安装 Node.js 24，再运行 install.cmd / bash install.command。没有预构建载荷时，脚本会执行 npm ci 和桌面构建，再安装两个组件。开发用 npm start 仍只从源码启动，不执行安装。
+
+### AI 与无人值守安装
+
+添加 --no-launch --no-shortcuts，可完成安装而不打开应用、不创建开始菜单快捷方式。--install-dir 指定绝对路径，目标应为解压/源码目录之外的空目录或本安装器管理的旧安装目录。--skip-build 仅供开发时复用已有目录构建。
+
+~~~powershell
+.\install.cmd --no-launch --no-shortcuts --install-dir "C:\Users\YOUR_NAME\Apps\Epassword"
+~~~
+
+~~~bash
+bash install.command --no-launch --no-shortcuts --install-dir "$HOME/Applications/Epassword"
+~~~
+
+不要替用户填写或生成密码库主密码。插件启用与配对仍由用户完成。自动化安装测试使用上述两个无人值守选项。构建一体安装包：npm ci、npm run pack、npm run pack:setup；实际安装包测试：npm run test:installer（Windows 插件测试还需要 Playwright Chromium）。
+
+安装器不会递归删除旧安装。异常退出后，先确认没有安装进程，再移除残留 .install-lock 文件。残留 .staging-* / previous-* 可人工检查，先恢复其中的用户数据再删除。默认 Mac 开发包仍未公证，安装器不会绕过 Gatekeeper。
+
+
 ## 一、人类用户
 
 ### 方式 A：直接使用 Windows 程序
@@ -324,3 +358,11 @@ npm start
 ```
 
 平台依据：[Electron macOS 最低版本变更](https://github.com/electron/electron/blob/main/docs/breaking-changes.md)、[屏幕捕获权限](https://www.electronjs.org/docs/latest/api/desktop-capturer)。
+
+## Chrome 插件：人类与 AI 安装
+
+人类用户：启动更新后的桌面端，在 chrome://extensions 开启开发者模式并加载 extension 文件夹，通过桌面端「设置与恢复 → 浏览器插件」生成配对码，在 HTTPS 网页上打开插件完成配对。[完整步骤](docs/wiki/Browser-Extension-zh-CN.md)。Windows 与 Mac 步骤相同。
+
+AI：npm ci 后运行 npm test，再用 npx playwright install chromium 安装独立测试浏览器，执行 npm run test:browser 和 npm run pack:extension。测试只用临时配置和模拟账号，勿修改用户真实 Chrome 配置或使用真实密码库。执行 npm run pack 更新桌面程序，插件和桌面端需要配套分发。
+
+ZIP 是开发者模式使用的已解压扩展文件包，需先解压，不是 Chrome 商店发行版。Mac 原生集成仍待验证。

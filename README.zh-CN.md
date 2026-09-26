@@ -149,9 +149,9 @@ build/          Mac 签名权限配置
 
 ## 当前边界
 
-尚无云同步、浏览器自动填充、附件、共享、通行密钥或在线泄露服务。未经过独立安全审计，不宣称与 1Password 同等安全保证。
+尚无云同步、附件、共享、通行密钥或在线泄露服务。未经过独立安全审计，不宣称与 1Password 同等安全保证。
 
-渲染器关闭 Node 集成，启用上下文隔离和 sandbox，不加载远程内容。解锁期间凭据存在应用内存中，不写入应用日志或浏览器本地存储；JavaScript 字符串和系统剪贴板历史无法保证物理擦除。点击网址会交给系统默认浏览器打开。
+渲染器关闭 Node 集成，启用上下文隔离和 sandbox，不加载远程内容。解锁期间凭据存在应用内存中，不写入应用日志或浏览器本地存储；JavaScript 字符串和系统剪贴板历史无法保证物理擦除。可选插件的配对凭据与待保存注册信息暂存在浏览器会话内存中。点击网址会交给系统默认浏览器打开。
 
 ## 参考
 
@@ -160,3 +160,13 @@ build/          Mac 签名权限配置
 - [TOTP：RFC 6238](https://www.rfc-editor.org/rfc/rfc6238)
 - [OTP 设置链接格式](https://github.com/google/google-authenticator/wiki/Key-Uri-Format)
 - [jsQR 本地二维码识别](https://github.com/cozmo/jsQR)
+
+## Chrome 浏览器插件
+
+支持精确匹配 HTTPS 网站的账号填充、单账号可选自动填充，以及注册信息检测后确认保存到 Excel。桌面端必须运行且已解锁，Windows / Mac 使用同一插件。
+
+Chrome 开发者模式加载 extension 文件夹，再在桌面端设置中生成配对码并粘贴到插件。重启任一应用后重新配对。参见[完整安装与限制](docs/wiki/Browser-Extension-zh-CN.md)，使用 npm run pack:extension 生成 ZIP。
+
+## 桌面与插件一体安装
+
+下载 Actions 中对应平台的 Epassword-Setup ZIP，完整解压后运行 install.cmd（Windows）或 bash install.command（Mac）。安装包自带运行时，无需 Node.js，同时安装桌面程序与插件文件，再按指引在 Chrome 中启用并配对。[安装说明](INSTALL.zh-CN.md)。

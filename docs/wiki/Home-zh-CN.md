@@ -24,6 +24,8 @@ Windows x64 已在本地测试。Mac Intel 和 Apple Silicon 已实现适配与�
 
 ## Wiki 发布位置
 
-Wiki 页面与源码一起保存在 docs/wiki，可直接在仓库中阅读。当前仓库是私有仓库；尝试启用原生 Wiki 后，GitHub 仍返回 has_wiki=false，未修改仓库可见性。
+Wiki 页面与源码一起保存在公开仓库的 docs/wiki，可直接阅读。原生 Wiki 功能已开启，但独立的 Wiki Git 仓库尚未初始化。
 
-根据 [GitHub Wiki 文档](https://docs.github.com/en/communities/documenting-your-project-with-wikis)，私有仓库原生 Wiki 是否可用取决于账号或组织套餐。功能可用且完成首次初始化后可以迁移这些页面；目前实际发布位置是仓库内的文档目录。
+目前实际发布位置是仓库内的文档目录，不依赖原生 Wiki 初始化。
+
+- [Chrome 浏览器插件](Browser-Extension-zh-CN.md)：安装、配对、填充与注册保存。

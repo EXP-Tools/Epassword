@@ -34,6 +34,6 @@ No cloud synchronization or additional application recovery key is used. Passwor
 
 Unlocked data exists in process memory. JavaScript strings and OS clipboard history are not guaranteed to be physically erased. The application is not independently security-audited and does not claim parity with 1Password.
 
-Local checks identify short or repeated passwords, not online breaches. There is no browser autofill, attachment storage, sharing or passkey support.
+Local checks identify short or repeated passwords, not online breaches. Attachment storage, sharing and passkeys are not supported. The optional [Chrome extension](Browser-Extension.md) adds paired, exact-origin filling and confirmed registration saving; tokens and pending registration credentials are kept in browser session memory.
 
 Native Windows Excel recovery has been tested. Excel for Mac recovery remains unverified; report the platform actually tested.

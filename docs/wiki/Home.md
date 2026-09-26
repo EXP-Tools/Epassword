@@ -24,6 +24,8 @@ Windows x64 has been tested locally. Mac Intel and Apple Silicon support and bui
 
 ## Where this wiki lives
 
-These pages are versioned with the project under docs/wiki so they can be read even when GitHub's separate Wiki feature is unavailable. The repository is private; enabling its native Wiki was attempted, but GitHub continued to report has_wiki=false. Repository visibility has not been changed.
+These pages are versioned with the public repository under docs/wiki. The repository's native Wiki feature is enabled but its separate Git repository has not been initialized.
 
-[GitHub Wiki availability](https://docs.github.com/en/communities/documenting-your-project-with-wikis) depends on the account/organization plan for private repositories. Once that feature is available and initialized, these pages can be migrated. Their current published location is this repository's documentation directory.
+The current published documentation is this source-controlled directory. It remains available independently of native Wiki initialization.
+
+- [Chrome extension](Browser-Extension.md): install, pair, fill and save registrations.

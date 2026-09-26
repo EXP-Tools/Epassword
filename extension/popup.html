@@ -1,0 +1,8 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Epassword</title><link rel="stylesheet" href="popup.css"></head>
+<body><header><b>Epassword</b><small>Local Excel vault · 本地密码库</small></header>
+<p id="site"></p><p id="status" role="status"></p>
+<section id="pending" hidden><h2>保存新密码 / Save password?</h2><p id="draft"></p><p class="hint">注册检测不代表注册成功。请先确认网站已接受新密码。<br>Confirm registration succeeded before saving.</p><button id="save">保存到 Epassword / Save</button><button id="discard" class="secondary">忽略 / Dismiss</button></section>
+<section><h2>此网站的账号 / Logins</h2><div id="accounts"></div><label><input type="checkbox" id="auto">此网站单账号自动填充<br>Auto-fill one matching login on this site</label><p class="hint">精确匹配 HTTPS 域名和端口；不会自动提交。<br>Exact HTTPS origin only. Never auto-submit.</p></section>
+<details id="pairing"><summary>连接桌面端 / Pair desktop</summary><p class="hint">桌面端：设置与恢复 → 浏览器插件 → 生成配对码。重启应用或浏览器后重新配对。<br>Desktop Settings → Browser extension → Generate code. Pair again after restarting either app.</p><form id="pair"><label for="token">配对码 / Pairing code</label><input id="token" type="password" required autocomplete="off" spellcheck="false"><button>配对 / Pair</button></form><button id="disconnect" class="secondary">断开 / Disconnect</button></details>
+<script src="popup.js"></script></body></html>

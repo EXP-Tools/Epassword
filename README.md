@@ -20,6 +20,10 @@ macOS requires version 12 or later for the bundled Electron runtime. Source buil
 
 Windows and Mac use the same workbook format and master password. Copy your workbook manually to move between devices; there is no automatic synchronization.
 
+## Install desktop and Chrome extension together
+
+Download the matching Epassword-Setup ZIP from Actions artifacts, extract it, and run install.cmd (Windows) or bash install.command (Mac). The included runtime installs both components without Node.js. Follow the generated guide to enable the plugin in Chrome and pair it. [Combined installation](INSTALL.md#combined-desktop--chrome-installation-recommended).
+
 ## Quick start
 
 Clone this repository using an account with access, then run:
@@ -43,6 +47,7 @@ Excel is not required to run the app. It is needed only for independent Excel re
 
 | Area | Capabilities |
 | --- | --- |
+| Browser extension | Exact HTTPS origin matching, optional single-account auto-fill and confirmed registration saving |
 | Items | Logins, secure notes, credit cards and identities; create, edit, search, favorites, tags, archive and trash recovery |
 | Copy | Click usernames, masked passwords, custom fields or OTP codes; keyboard Enter/Space also works |
 | Password generation | 8–64 characters; choose uppercase, lowercase, digits and symbols; every selected group is included |
@@ -57,6 +62,12 @@ Excel is not required to run the app. It is needed only for independent Excel re
 Credit-card and identity details use notes and custom fields. Search covers titles, usernames, URLs and tags, not custom-field values.
 
 Ordinary copied values are cleared after 30 seconds if the clipboard still contains the application's copied value. OTP copies are cleared no later than the end of the current period or 30 seconds. Locking also clears matching clipboard content.
+
+## Chrome extension
+
+Fill exact-site HTTPS logins and save detected registration credentials after confirmation in Epassword. Optional automatic fill works when a single account matches. Windows and Mac use the same extension; desktop must be running and unlocked.
+
+Load the extension folder through Chrome Developer mode, generate a pairing code in desktop Settings, then paste it into the extension. Restarting either application requires re-pairing. See the [complete setup and limitations](docs/wiki/Browser-Extension.md). Build a ZIP with npm run pack:extension.
 
 ## Using custom fields and OTP
 
@@ -135,6 +146,7 @@ Previously verified locally: Windows desktop flows, all 18 RFC 6238 vectors, and
 ~~~text
 electron/       Main process, IPC, Excel encryption, password generation, OTP and QR
 ui/             Local interface, styles and custom fields
+extension/      Chrome Manifest V3 extension
 scripts/        Packaging
 tests/          Automated and Excel compatibility tests
 build/          Mac signing entitlements
@@ -146,9 +158,9 @@ start.command   Mac source launcher
 
 ## Limitations
 
-No cloud sync, browser autofill, attachments, sharing, passkeys or online breach lookup. Epassword has not received an independent security audit and does not claim security parity with 1Password.
+No cloud sync, attachments, sharing, passkeys or online breach lookup. Epassword has not received an independent security audit and does not claim security parity with 1Password.
 
-The renderer has Node integration disabled, context isolation and sandbox enabled, and does not load remote content. Unlocked credentials exist in process memory. The app does not write them to application logs or browser local storage, but JavaScript strings and OS clipboard history cannot be guaranteed to be physically erased. Opening a saved URL uses the system browser.
+The renderer has Node integration disabled, context isolation and sandbox enabled, and does not load remote content. Unlocked credentials exist in process memory. The app does not write them to application logs or browser local storage, but JavaScript strings and OS clipboard history cannot be guaranteed to be physically erased. The optional extension holds pairing credentials and pending registrations in memory-only browser session storage. Opening a saved URL uses the system browser.
 
 ## References
 

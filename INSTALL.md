@@ -4,6 +4,39 @@
 
 This guide has separate paths for human users and AI agents. Read [README.md](README.md) for features and [the wiki](docs/wiki/Home.md) for workflows and recovery. Commands run from the project root unless stated otherwise.
 
+## Combined desktop + Chrome installation (recommended)
+
+Download **Epassword-Setup-1.1.0-win-x64.zip**, **Epassword-Setup-1.1.0-mac-x64.zip**, or **Epassword-Setup-1.1.0-mac-arm64.zip** from Actions artifacts. Extract the entire ZIP into a temporary/download folder, close Epassword, then:
+
+- Windows: double-click **install.cmd**.
+- Mac: run **bash install.command** in the extracted directory (or double-click the executable launcher).
+
+The Setup ZIP includes its runtime: **Node.js/npm are not required**. The script installs both the complete desktop app and Chrome extension files in one run, creates a Windows Start-menu shortcut, and opens the desktop app, a local setup guide and Chrome's extension manager when Chrome is installed.
+
+Default installation roots are **%LOCALAPPDATA%/Programs/Epassword** on Windows and **~/Applications/Epassword** on Mac. The app lives in app/ and the extension in the stable chrome-extension/ subdirectory. Keep real Excel vaults outside this directory. Upgrades retain the previous app and plugin files in previous-* directories rather than deleting them.
+
+**Finish Chrome activation:** open chrome://extensions, enable Developer mode, choose Load unpacked, and select the installed chrome-extension folder shown by the guide. Pin the extension, unlock Epassword, generate a pairing code in desktop Settings → 浏览器插件, and paste it into the extension on an HTTPS page. After an upgrade, click Reload for the existing extension. Restarting either application requires re-pairing.
+
+Chrome does not allow an ordinary installer to silently enable an unpublished extension on Windows/macOS. This installation prepares both components and explicitly guides the required browser activation; it does not modify browser profiles, enterprise policies or system security settings. [Chrome distribution rules](https://developer.chrome.com/docs/extensions/how-to/distribute).
+
+Source checkout alternative: run install.cmd / bash install.command after installing Node.js 24. With no bundled payload, the script runs npm ci and builds the desktop app before installing both components. Development-only npm start still launches from source without installing.
+
+### For AI and unattended setup
+
+Use --no-launch --no-shortcuts to install without opening apps or modifying Start-menu shortcuts. --install-dir accepts an absolute destination path; select an empty folder outside the extracted/source folder, or a folder previously managed by this installer. --skip-build reuses an existing source directory build and is intended for development.
+
+~~~powershell
+.\install.cmd --no-launch --no-shortcuts --install-dir "C:\Users\YOUR_NAME\Apps\Epassword"
+~~~
+
+~~~bash
+bash install.command --no-launch --no-shortcuts --install-dir "$HOME/Applications/Epassword"
+~~~
+
+Do not invent or enter the user's vault master password. Browser activation and pairing remain user steps. Both --no-launch and --no-shortcuts are used by automated installer tests. To build the combined package: npm ci, npm run pack, npm run pack:setup. Test the actual ZIP with npm run test:installer (Windows also needs the Playwright Chromium runtime for extension testing).
+
+The installer never recursively deletes old installations. If installation is interrupted, close any installer process before removing a stale .install-lock file. Retained .staging-* / previous-* folders can be reviewed manually; recover any user data before deleting them. Default Mac development builds remain non-notarized; the installer does not bypass Gatekeeper.
+
 ## 1. For human users
 
 ### Requirements
@@ -301,3 +334,11 @@ npm start
 ~~~
 
 These commands do not change global system environment variables.
+
+## Chrome extension — humans and AI agents
+
+Human users: start the updated desktop build, load the extension folder at chrome://extensions with Developer mode enabled, and pair using the code from desktop Settings → 浏览器插件. Open an HTTPS page before pairing. [Detailed steps](docs/wiki/Browser-Extension.md). The same procedure applies to Windows and Mac.
+
+AI agents: after npm ci, run npm test, install the isolated test browser with npx playwright install chromium, then run npm run test:browser and npm run pack:extension. Use temporary profiles and fixture credentials. Do not change the user's real Chrome profile or use their vault for testing. Rebuild the desktop app with npm run pack so its bridge matches the extension. Both artifacts must be distributed; the extension is not a standalone vault.
+
+The ZIP is an unpacked-development extension archive, not a Chrome Web Store release. Unzip it before loading. Native Mac integration remains unverified locally.

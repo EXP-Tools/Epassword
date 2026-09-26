@@ -34,6 +34,12 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm test
+      - name: Install isolated browser test runtime
+        if: matrix.platform == 'win'
+        run: npx playwright install chromium
+      - name: Test Chrome integration
+        if: matrix.platform == 'win'
+        run: npm run test:browser
       - name: Package local app
         run: npm run pack
       - name: Smoke test packaged app
@@ -47,8 +53,14 @@ jobs:
             export EPASSWORD_TEST_RUNTIME="$PWD/release/mac/Epassword.app/Contents/MacOS/Epassword"
           fi
           node tests/platform-smoke.cjs
+      - name: Package Chrome extension
+        run: npm run pack:extension
       - name: Build distribution packages
         run: node scripts/pack.cjs --dist --platform=${{ matrix.platform }} --arch=${{ matrix.arch }}
+      - name: Build combined desktop and Chrome installer
+        run: npm run pack:setup -- --arch=${{ matrix.arch }}
+      - name: Test combined installer
+        run: npm run test:installer
       - name: Upload build artifacts (not a public release)
         uses: actions/upload-artifact@v4
         with:
