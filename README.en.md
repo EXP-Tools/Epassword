@@ -215,3 +215,7 @@ The desktop app remembers the last successfully opened or created vault path on 
 ## Support the author
 
 Choose **打赏作者** in the desktop sidebar or Chrome extension popup to view Alipay and WeChat donation codes. Images are bundled for offline use; donations are optional.
+
+## Excel import and export
+
+New source builds support selected/all-item export to plain Excel or encrypted Excel with a separate password. Preview and import selected Epassword-format items as new entries, including custom fields and OTP. See the [illustrated guide](docs/USER-GUIDE.en.md). Published 1.0 installers do not include this new feature; use a current build.

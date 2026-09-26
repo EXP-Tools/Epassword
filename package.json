@@ -22,7 +22,8 @@
     "pack:setup": "node scripts/pack-setup.cjs",
     "test:installer": "node tests/installer-smoke.cjs",
     "install:local": "node scripts/install.cjs",
-    "test:api": "node tests/api-desktop.cjs"
+    "test:api": "node tests/api-desktop.cjs",
+    "test:transfer": "node tests/transfer-desktop.cjs"
   },
   "dependencies": {
     "exceljs": "4.4.0",

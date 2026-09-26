@@ -16,9 +16,9 @@ function validate(items) {
   validateFields(item.fields);
  }
 }
-async function encode(items, password) {
+async function encode(items, password, {encrypted=true}={}) {
  validate(items);
- if (typeof password !== 'string' || password.length < 12 || password.length > 255) throw Error('主密码需要 12–255 个字符');
+ if (encrypted && (typeof password !== 'string' || password.length < 12 || password.length > 255)) throw Error('主密码需要 12–255 个字符');
  const book = new ExcelJS.Workbook();
  const sheet = book.addWorksheet('密码库', {views:[{state:'frozen',ySplit:1}]});
  sheet.columns = Object.entries(columns).map(([key,header]) => ({key,header,width:key==='notes'?55:28}));
@@ -34,15 +34,17 @@ async function encode(items, password) {
  const readme=book.addWorksheet('使用说明');
  readme.getColumn(1).width=110;
  ['Epassword · 可独立恢复的本地密码库','使用 Microsoft Excel 打开本文件，输入 Epassword 主密码即可查看密码库。','主密码就是 Excel 文件打开密码，不是工作表保护密码。忘记密码无法恢复。','基本信息保存在「密码库」，更多信息及 OTP 密钥保存在「自定义字段」；没有额外应用密钥。','编辑后保留表头、ID、类型和所有列；收藏/归档/已删除使用 true 或 false。','类型：登录信息、安全笔记、信用卡、身份信息。其他信息可保存在备注或自定义字段。','不要同时在 Excel 和 Epassword 中编辑。恢复备份时先复制 .bak 为 .xlsx。','格式版本：2'].forEach(s=>readme.addRow([s]));
+ if(!encrypted){readme.getCell('A2').value='本文件是未加密导出，任何能访问文件的人都可读取账号、密码及 OTP 密钥。';readme.getCell('A3').value='导入 Epassword 后，目标密码库仍使用自己的主密码加密。';}
  readme.addRow(['自定义字段保存在「自定义字段」工作表，通过项目ID对应密码库。字段内容为可读文本。']);
  readme.addRow(['一次性密码字段存储的是 OTP 设置密钥 / otpauth:// 链接，不是会过期的验证码；可重新导入其他验证器恢复。']);
  const plain=Buffer.from(await book.xlsx.writeBuffer());
- try {return office.encrypt(plain,{password});} finally {plain.fill(0);}
+ try {return encrypted?office.encrypt(plain,{password}):Buffer.from(plain);} finally {plain.fill(0);}
 }
-async function decode(data,password) {
- if (!office.isEncrypted(data)) throw Error('只接受带文件打开密码的 Excel 密码库');
+async function decode(data,password,{allowPlain=false}={}) {
+ const encrypted=office.isEncrypted(data);
+ if (!encrypted&&!allowPlain) throw Error('只接受带文件打开密码的 Excel 密码库');
  let plain;
- try {plain=await office.decrypt(data,{password});} catch {throw Error('主密码错误，或文件已损坏');}
+ try {plain=encrypted?await office.decrypt(data,{password}):Buffer.from(data);} catch {throw Error('主密码错误，或文件已损坏');}
  try {
   const book=new ExcelJS.Workbook(); await book.xlsx.load(plain);
   const sheet=book.getWorksheet('密码库');

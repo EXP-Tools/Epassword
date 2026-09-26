@@ -36,8 +36,9 @@ const browserBridge=new BrowserBridge({
  },generation),
  changed:()=>{if(win&&!win.isDestroyed())win.webContents.send('vault-changed');}
 });
+const transfer=require('./transfer.cjs').transferHandlers({vault,dialog,getWindow:()=>win,requireUnlocked,touch,mutate});
 function clearClip(){clearTimeout(clipTimer);if(copied&&clipboard.readText()===copied)clipboard.clear();copied=null;}
-function lock(){clearTimeout(idle);programApi.revokeAll();vault.lock();clearClip();if(win&&!win.isDestroyed())win.webContents.send('locked');}
+function lock(){transfer.clear();clearTimeout(idle);programApi.revokeAll();vault.lock();clearClip();if(win&&!win.isDestroyed())win.webContents.send('locked');}
 function touch(){clearTimeout(idle);if(vault.items)idle=setTimeout(lock,5*60*1000);}
 function requireUnlocked(){if(!vault.items)throw Error('请先解锁密码库');}
 function putClipboard(text,timeout=30000){clearClip();clipboard.writeText(text);copied=text;clipTimer=setTimeout(clearClip,timeout);touch();}
@@ -66,6 +67,7 @@ async function scanOtp(mode){
  }finally{scanning=false;if(hidden&&win&&!win.isDestroyed()){win.show();win.focus();}}
 }
 const channels={
+ ...transfer.channels,
  'choose':async(_,mode)=>{if(mode==='create'){const r=await dialog.showSaveDialog(win,{title:'创建 Excel 密码库',defaultPath:'Epassword.xlsx',filters:[{name:'Excel 密码库',extensions:['xlsx']}]});return r.canceled?null:r.filePath;}const r=await dialog.showOpenDialog(win,{filters:[{name:'Excel 密码库',extensions:['xlsx']}],properties:['openFile']});return r.canceled?null:r.filePaths[0];},
  'unlock':async(_,p)=>{if(vault.items)throw Error('请先锁定当前密码库'); const items=await vault[p.mode==='create'?'create':'open'](p.path,p.password);touch();return {items,path:vault.path};},
  'save':(_,item)=>mutate(async()=>{const now=new Date().toISOString();const old=vault.items.find(i=>i.id===item.id);if(old&&old.updated!==item.updated)throw Error('项目已更新，请重新打开后编辑');const value={...item,id:old?.id||randomUUID(),created:old?.created||now,updated:now};const items=old?vault.items.map(i=>i.id===old.id?value:i):[...vault.items,value];await vault.save(items);touch();return items;}),

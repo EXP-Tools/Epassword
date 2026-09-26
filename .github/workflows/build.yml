@@ -43,6 +43,9 @@ jobs:
       - name: Test program API integration
         if: matrix.platform == 'win'
         run: npm run test:api
+      - name: Test Excel import and export
+        if: matrix.platform == 'win'
+        run: npm run test:transfer
       - name: Package local app
         run: npm run pack
       - name: Smoke test packaged app

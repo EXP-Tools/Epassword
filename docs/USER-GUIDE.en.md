@@ -88,6 +88,32 @@ Create the token and supply it only to a trusted local program, outside AI conve
 
 This connects local automation tools; it is not a built-in AI chat. See the [API guide](API.md) for requests and Playwright filling.
 
+## Import and export Excel (new source-build feature)
+
+The published 1.0 installers do not include this feature; use a newer build containing import/export.
+
+### Export selected items
+
+![Select items and encrypt an export](screenshots/export.png)
+
+1. Unlock the vault and choose 导出 Excel in the sidebar.
+2. Select individual items or 全选 (Select all). Archived/trash entries are included and labeled.
+3. Encryption is enabled by default. Enter and confirm a separate 12–255 character password for the exported file. This does not change the current vault password.
+4. Disable encryption for a plain workbook. Anyone with access can read passwords, notes and OTP setup secrets.
+5. Choose 导出所选项目 and a new filename. Existing files are never overwritten.
+
+Exports include custom fields and OTP setup configuration, not just expiring codes. Encrypted exports open in Excel with the export password and can also be opened as Epassword vaults. Plain exports must use the import flow; the working vault remains encrypted.
+
+### Preview and import
+
+![Excel import preview](screenshots/import.png)
+
+Unlock the destination vault, choose 导入 Excel, enter the source password if encrypted (otherwise leave blank), and choose 选择文件并预览. Select an Epassword workbook/export, choose the desired entries or select all, then click 导入所选项目.
+
+Only Epassword's worksheet/column format is supported, not arbitrary Excel/CSV. Source files are limited to 20 MB; the destination allows 10000 items total. Preview expires after five minutes or locking.
+
+Import appends new IDs without overwriting accounts, preserving custom fields, OTP and archive/trash state. Repeated imports create copies. Imported items are encrypted under the destination vault's existing master password.
+
 ## 8. Backup and Excel recovery
 
 设置与恢复 displays the current file; 在文件夹中显示 opens its folder.
