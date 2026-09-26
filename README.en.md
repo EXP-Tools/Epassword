@@ -31,6 +31,8 @@ Extract the entire ZIP, then run install.cmd on Windows or bash install.command 
 
 [![Epassword — click to explore the interactive demo](docs/screenshots/vault.png)](https://exp-tools.github.io/Epassword/)
 
+Explore more use cases in the [GitHub Pages interactive demo](https://exp-tools.github.io/Epassword/).
+
 ## Platform status
 
 | Platform | Status |

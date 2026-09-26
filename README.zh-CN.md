@@ -31,6 +31,8 @@ Epassword 使用独立品牌，不关联 1Password 服务。已添加 Windows x6
 
 [![Epassword 界面预览，点击体验交互演示](docs/screenshots/vault.png)](https://exp-tools.github.io/Epassword/)
 
+更多使用场景，请前往 [GitHub Pages 交互演示](https://exp-tools.github.io/Epassword/)。
+
 ## 开始使用
 
 完整安装流程见 **[INSTALL.md](INSTALL.md)**，分别提供人类用户和 AI 的安装、验证、打包与排错步骤。
