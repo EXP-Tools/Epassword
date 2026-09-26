@@ -29,3 +29,5 @@ Wiki 页面与源码一起保存在公开仓库的 docs/wiki，可直接阅读�
 目前实际发布位置是仓库内的文档目录，不依赖原生 Wiki 初始化。
 
 - [Chrome 浏览器插件](Browser-Extension-zh-CN.md)：安装、配对、填充与注册保存。
+
+- [AI 与程序 API](../API.zh-CN.md)：限网站授权与本机自动化填充。

@@ -90,6 +90,12 @@ async function install(options={}) {
  }
  const executable=platform==='win32'?'Epassword.exe':'Epassword.app/Contents/MacOS/Epassword';
  if(!await exists(path.join(sourceApp,executable)))throw Error('Desktop payload missing. Build first or extract the full Setup ZIP.');
+ const integrationFiles=[
+  ['integrations/epassword-client.cjs','epassword-client.cjs'],
+  ['docs/API.md','API.md'],['docs/API.zh-CN.md','API.zh-CN.md'],['docs/openapi.json','openapi.json']
+ ];
+ const includeApi=metadata.apiIncluded || await exists(path.join(sourceRoot,integrationFiles[0][0]));
+ if(includeApi)for(const [file]of integrationFiles)if(!await exists(path.join(sourceRoot,file)))throw Error('API integration payload missing: '+file);
  const sourceExtension=path.join(sourceRoot,'extension');
  for(const file of extensionFiles)if(!await exists(path.join(sourceExtension,file)))throw Error('Extension payload missing: '+file);
  const manifest=JSON.parse(await fs.readFile(path.join(sourceExtension,'manifest.json'),'utf8'));
@@ -116,7 +122,7 @@ async function install(options={}) {
   const relative=path.relative(await fs.realpath(source),root);
   if(!relative || (!relative.startsWith('..'+path.sep)&&relative!=='..'&&!path.isAbsolute(relative)))throw Error('Install outside the source / extracted Setup folder.');
  }
- for(const name of ['app','chrome-extension',MARKER,'setup.html'])await rejectLink(inside(root,path.join(root,name)));
+ for(const name of ['app','chrome-extension','integrations',MARKER,'setup.html'])await rejectLink(inside(root,path.join(root,name)));
  const lockPath=inside(root,path.join(root,'.install-lock'));
  let lock;try{lock=await fs.open(lockPath,'wx');}catch(e){if(e.code==='EEXIST')throw Error('Another installation is running. If a previous installer crashed, remove .install-lock after checking no installer is active.');throw e;}
  const id=randomUUID(), stage=inside(root,path.join(root,'.staging-'+id)), backup=inside(root,path.join(root,'previous-'+id));
@@ -129,11 +135,15 @@ async function install(options={}) {
   await fs.cp(sourceApp,path.join(stage,'app'),{recursive:true,verbatimSymlinks:true});
   await fs.mkdir(path.join(stage,'chrome-extension'));
   for(const name of extensionFiles)await fs.copyFile(path.join(sourceExtension,name),path.join(stage,'chrome-extension',name));
+  if(includeApi){
+   await fs.mkdir(path.join(stage,'integrations'));
+   for(const [source,destination]of integrationFiles)await fs.copyFile(path.join(sourceRoot,source),path.join(stage,'integrations',destination));
+  }
   const appPath=path.join(root,'app',platform==='win32'?'Epassword.exe':'Epassword.app');
   const result={root,appPath,extensionPath:path.join(root,'chrome-extension'),guidePath:path.join(root,'setup.html'),extensionActivationRequired:true};
   await fs.writeFile(path.join(stage,'setup.html'),guide(result.extensionPath,appPath),'utf8');
   // Only owned component directories are moved; previous files (including unexpected user data) are retained.
-  for(const name of ['app','chrome-extension','setup.html']) {
+  for(const name of ['app','chrome-extension',...(includeApi?['integrations']:[]),'setup.html']) {
    const destination=inside(root,path.join(root,name));
    if(await exists(destination)){await fs.rename(destination,inside(root,path.join(backup,name)));moved.push(name);}
    await fs.rename(inside(root,path.join(stage,name)),destination);activated.push(name);

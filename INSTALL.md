@@ -6,7 +6,7 @@ This guide has separate paths for human users and AI agents. Read [README.md](RE
 
 ## Combined desktop + Chrome installation (recommended)
 
-Download **Epassword-Setup-1.1.0-win-x64.zip**, **Epassword-Setup-1.1.0-mac-x64.zip**, or **Epassword-Setup-1.1.0-mac-arm64.zip** from Actions artifacts. Extract the entire ZIP into a temporary/download folder, close Epassword, then:
+Download **Epassword-Setup-1.2.0-win-x64.zip**, **Epassword-Setup-1.2.0-mac-x64.zip**, or **Epassword-Setup-1.2.0-mac-arm64.zip** from Actions artifacts. Extract the entire ZIP into a temporary/download folder, close Epassword, then:
 
 - Windows: double-click **install.cmd**.
 - Mac: run **bash install.command** in the extracted directory (or double-click the executable launcher).
@@ -342,3 +342,7 @@ Human users: start the updated desktop build, load the extension folder at chrom
 AI agents: after npm ci, run npm test, install the isolated test browser with npx playwright install chromium, then run npm run test:browser and npm run pack:extension. Use temporary profiles and fixture credentials. Do not change the user's real Chrome profile or use their vault for testing. Rebuild the desktop app with npm run pack so its bridge matches the extension. Both artifacts must be distributed; the extension is not a standalone vault.
 
 The ZIP is an unpacked-development extension archive, not a Chrome Web Store release. Unzip it before loading. Native Mac integration remains unverified locally.
+
+## Local program API
+
+Combined installs also place the Node.js client, OpenAPI contract and bilingual API guide under integrations/. In desktop Settings, authorize each local program for explicit HTTPS sites. Set EPASSWORD_API_TOKEN only in the caller's environment; do not use your master password or Chrome pairing code. [API instructions](docs/API.md).

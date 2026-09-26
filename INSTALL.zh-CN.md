@@ -8,7 +8,7 @@
 
 ## 桌面应用 + Chrome 插件一体安装（推荐）
 
-从 Actions 构建产物下载 **Epassword-Setup-1.1.0-win-x64.zip**、**Epassword-Setup-1.1.0-mac-x64.zip** 或 **Epassword-Setup-1.1.0-mac-arm64.zip**。完整解压到下载/临时目录，关闭 Epassword，然后：
+从 Actions 构建产物下载 **Epassword-Setup-1.2.0-win-x64.zip**、**Epassword-Setup-1.2.0-mac-x64.zip** 或 **Epassword-Setup-1.2.0-mac-arm64.zip**。完整解压到下载/临时目录，关闭 Epassword，然后：
 
 - Windows：双击 **install.cmd**。
 - Mac：在解压目录运行 **bash install.command**，或双击具有执行权限的安装入口。
@@ -366,3 +366,7 @@ npm start
 AI：npm ci 后运行 npm test，再用 npx playwright install chromium 安装独立测试浏览器，执行 npm run test:browser 和 npm run pack:extension。测试只用临时配置和模拟账号，勿修改用户真实 Chrome 配置或使用真实密码库。执行 npm run pack 更新桌面程序，插件和桌面端需要配套分发。
 
 ZIP 是开发者模式使用的已解压扩展文件包，需先解压，不是 Chrome 商店发行版。Mac 原生集成仍待验证。
+
+## 本机程序 API
+
+一体安装包同时安装 integrations/ 下的 Node.js 客户端、OpenAPI 定义及双语指南。桌面设置中逐个授权本机程序访问明确的 HTTPS 网站，将 EPASSWORD_API_TOKEN 仅放在调用进程环境中，不使用主密码或 Chrome 配对码。[API 说明](docs/API.zh-CN.md)。

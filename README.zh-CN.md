@@ -170,3 +170,7 @@ Chrome 开发者模式加载 extension 文件夹，再在桌面端设置中生�
 ## 桌面与插件一体安装
 
 下载 Actions 中对应平台的 Epassword-Setup ZIP，完整解压后运行 install.cmd（Windows）或 bash install.command（Mac）。安装包自带运行时，无需 Node.js，同时安装桌面程序与插件文件，再按指引在 Chrome 中启用并配对。[安装说明](INSTALL.zh-CN.md)。
+
+## AI 与程序 API
+
+支持独立、限时、限网站的本机程序授权，查询匹配账号并读取指定凭据用于填充。锁定密码库立即撤销 API Token。附带 Playwright 填充助手，只向调用者返回填充状态。[中文 API 文档](docs/API.zh-CN.md) · [OpenAPI](docs/openapi.json)。

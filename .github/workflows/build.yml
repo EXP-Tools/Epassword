@@ -40,6 +40,9 @@ jobs:
       - name: Test Chrome integration
         if: matrix.platform == 'win'
         run: npm run test:browser
+      - name: Test program API integration
+        if: matrix.platform == 'win'
+        run: npm run test:api
       - name: Package local app
         run: npm run pack
       - name: Smoke test packaged app

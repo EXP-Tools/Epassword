@@ -26,5 +26,7 @@ const fs=require('node:fs/promises'),path=require('node:path'),os=require('node:
  run(process.execPath,[path.join(root,'tests/platform-smoke.cjs')],env);
  if(platform==='win32')run(process.execPath,[path.join(root,'tests/browser-desktop.cjs')],
   {...env,EPASSWORD_TEST_EXTENSION:path.join(target,'chrome-extension')});
+ if(platform==='win32')run(process.execPath,[path.join(root,'tests/api-desktop.cjs')],{...env,EPASSWORD_TEST_API_CLIENT:path.join(target,'integrations/epassword-client.cjs')});
+ assert.ok(await fs.stat(path.join(target,'integrations/openapi.json')));
  console.log('PASS: Setup ZIP installed both components using its bundled runtime; installed app launched. '+target);
 })().catch(e=>{console.error(e);process.exitCode=1;});

@@ -79,7 +79,13 @@ const {decode}=require('../electron/vault.cjs');
   assert.equal(JSON.stringify(local).includes('New-fixture'),false);
   await desktop.evaluate(()=>epassword.call('lock'));
   await popup.evaluate(()=>refresh());await expect(popup.locator('#status')).toContainText('解锁');
-  await website.goto('https://vault.example.test/login');await expect(website.locator('input[type=password]')).toHaveValue('');
+  // Chromium can restore previously typed form values independently of this extension.
+  // Check a fresh secret request, rather than treating browser form restoration as an unlock.
+  const lockedReadDenied=await worker.evaluate(async id=>{
+   try{await request('/fill',{url:'https://vault.example.test',id});return false;}
+   catch(e){return /解锁/.test(e.message);}
+  },recovered[0].id);
+  assert.equal(lockedReadDenied,true);
   console.log('PASS: real Chromium extension pairing, manual/automatic fill, multiple-account selection, domain boundary, cross-action refusal, registration detection, cancelled/confirmed Excel save, locked vault');
  }finally{if(browser)await browser.close();await app.close();}
 })().catch(e=>{console.error(e);process.exitCode=1;});

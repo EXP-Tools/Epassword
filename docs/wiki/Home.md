@@ -29,3 +29,5 @@ These pages are versioned with the public repository under docs/wiki. The reposi
 The current published documentation is this source-controlled directory. It remains available independently of native Wiki initialization.
 
 - [Chrome extension](Browser-Extension.md): install, pair, fill and save registrations.
+
+- [AI and program API](../API.md): scoped tokens and local automation filling.

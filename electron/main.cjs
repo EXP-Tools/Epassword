@@ -10,6 +10,8 @@ const {randomUUID}=require('node:crypto');
 const {generatePassword}=require('./generator.cjs');
 const {Vault}=require('./vault.cjs');
 const vault=new Vault();let win,idle,clipTimer,copied;
+const {ProgramApi}=require('./program-api.cjs');
+const programApi=new ProgramApi({vault});
 let mutationQueue=Promise.resolve();
 function mutate(action,generation=vault.generation){
  const job=mutationQueue.then(async()=>{requireUnlocked();if(generation!==vault.generation)throw Error('密码库已切换');return action();});
@@ -35,7 +37,7 @@ const browserBridge=new BrowserBridge({
  changed:()=>{if(win&&!win.isDestroyed())win.webContents.send('vault-changed');}
 });
 function clearClip(){clearTimeout(clipTimer);if(copied&&clipboard.readText()===copied)clipboard.clear();copied=null;}
-function lock(){clearTimeout(idle);vault.lock();clearClip();if(win&&!win.isDestroyed())win.webContents.send('locked');}
+function lock(){clearTimeout(idle);programApi.revokeAll();vault.lock();clearClip();if(win&&!win.isDestroyed())win.webContents.send('locked');}
 function touch(){clearTimeout(idle);if(vault.items)idle=setTimeout(lock,5*60*1000);}
 function requireUnlocked(){if(!vault.items)throw Error('请先解锁密码库');}
 function putClipboard(text,timeout=30000){clearClip();clipboard.writeText(text);copied=text;clipTimer=setTimeout(clearClip,timeout);touch();}
@@ -67,6 +69,10 @@ const channels={
  'choose':async(_,mode)=>{if(mode==='create'){const r=await dialog.showSaveDialog(win,{title:'创建 Excel 密码库',defaultPath:'Epassword.xlsx',filters:[{name:'Excel 密码库',extensions:['xlsx']}]});return r.canceled?null:r.filePath;}const r=await dialog.showOpenDialog(win,{filters:[{name:'Excel 密码库',extensions:['xlsx']}],properties:['openFile']});return r.canceled?null:r.filePaths[0];},
  'unlock':async(_,p)=>{if(vault.items)throw Error('请先锁定当前密码库'); const items=await vault[p.mode==='create'?'create':'open'](p.path,p.password);touch();return {items,path:vault.path};},
  'save':(_,item)=>mutate(async()=>{const now=new Date().toISOString();const old=vault.items.find(i=>i.id===item.id);if(old&&old.updated!==item.updated)throw Error('项目已更新，请重新打开后编辑');const value={...item,id:old?.id||randomUUID(),created:old?.created||now,updated:now};const items=old?vault.items.map(i=>i.id===old.id?value:i):[...vault.items,value];await vault.save(items);touch();return items;}),
+ 'api-create':(_,options)=>{requireUnlocked();touch();return programApi.createClient(options);},
+ 'api-status':()=>{requireUnlocked();return programApi.status();},
+ 'api-revoke':(_,id)=>{requireUnlocked();programApi.revoke(id);},
+ 'api-stop':()=>programApi.stop(),
  'browser-start':()=>{requireUnlocked();touch();return browserBridge.start();},
  'browser-stop':()=>browserBridge.stop(),
  'browser-status':()=>browserBridge.status(),
@@ -79,7 +85,7 @@ const channels={
  'otp-scan':(_,mode)=>scanOtp(mode),
  'screen-settings':async()=>{requireUnlocked();if(platform.isMac)await shell.openExternal('x-apple.systempreferences:com.apple.preference.security?Privacy_ScreenCapture');},
  'copy':(_,text)=>{if(!vault.items||typeof text!=='string'||text.length>30000)throw Error('无法复制');clearClip();clipboard.writeText(text);copied=text;clipTimer=setTimeout(clearClip,30000);touch();},
- 'change-password':(_,p)=>mutate(async()=>{if(p.current!==vault.password)throw Error('当前主密码错误');await vault.save(vault.items,p.next);touch();}),
+ 'change-password':(_,p)=>mutate(async()=>{if(p.current!==vault.password)throw Error('当前主密码错误');await vault.save(vault.items,p.next);programApi.revokeAll();touch();}),
  'reveal':()=>{if(vault.path)shell.showItemInFolder(vault.path);},
  'website':async(_,url)=>{if(!vault.items)throw Error('请先解锁');const u=new URL(url);if(!['https:','http:'].includes(u.protocol))throw Error('只允许 HTTP / HTTPS 链接');await shell.openExternal(u.href);}
 };
@@ -98,5 +104,5 @@ if(!app.requestSingleInstanceLock())app.quit();else{
   if(platform.isMac)Menu.setApplicationMenu(Menu.buildFromTemplate([{role:'appMenu'},{label:'密码库',submenu:[{label:'锁定密码库',accelerator:'Command+L',click:lock}]},{role:'editMenu'},{role:'viewMenu'},{role:'windowMenu'}]));
   createWindow();powerMonitor.on('suspend',lock);powerMonitor.on('lock-screen',lock);
   app.on('activate',showWindow);
- });app.on('window-all-closed',()=>{lock();if(!platform.keepAlive)app.quit();});app.on('before-quit',()=>{lock();browserBridge.stop();});app.on('second-instance',()=>{if(app.isReady())showWindow();});
+ });app.on('window-all-closed',()=>{lock();if(!platform.keepAlive)app.quit();});app.on('before-quit',()=>{lock();browserBridge.stop();programApi.stop();});app.on('second-instance',()=>{if(app.isReady())showWindow();});
 }

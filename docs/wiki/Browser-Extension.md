@@ -59,6 +59,6 @@ npx playwright install chromium
 npm run test:browser
 ~~~
 
-The ZIP is written to release/Epassword-Chrome-1.1.0.zip. Browser tests use isolated profiles and synthetic HTTPS pages, create their own encrypted vault, and never access your real Chrome profile. Set EPASSWORD_TEST_CHROME to an existing Chrome for Testing/Chromium executable if downloading is unavailable; standard branded Chrome may reject command-line extension loading. EPASSWORD_TEST_RUNTIME can point to a packaged desktop executable.
+The ZIP is written to release/Epassword-Chrome-1.2.0.zip. Browser tests use isolated profiles and synthetic HTTPS pages, create their own encrypted vault, and never access your real Chrome profile. Set EPASSWORD_TEST_CHROME to an existing Chrome for Testing/Chromium executable if downloading is unavailable; standard branded Chrome may reject command-line extension loading. EPASSWORD_TEST_RUNTIME can point to a packaged desktop executable.
 
 [Home](Home.md)

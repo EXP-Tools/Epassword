@@ -63,6 +63,10 @@ Credit-card and identity details use notes and custom fields. Search covers titl
 
 Ordinary copied values are cleared after 30 seconds if the clipboard still contains the application's copied value. OTP copies are cleared no later than the end of the current period or 30 seconds. Locking also clears matching clipboard content.
 
+## AI and program API
+
+Authorize local programs with independent, expiring tokens scoped to exact HTTPS sites. Query matching accounts or read one selected credential for filling. Vault lock revokes all API tokens. The included Playwright helper fills without returning the password to its caller. [API guide](docs/API.md) · [OpenAPI](docs/openapi.json).
+
 ## Chrome extension
 
 Fill exact-site HTTPS logins and save detected registration credentials after confirmation in Epassword. Optional automatic fill works when a single account matches. Windows and Mac use the same extension; desktop must be running and unlocked.

@@ -59,6 +59,6 @@ npx playwright install chromium
 npm run test:browser
 ~~~
 
-ZIP 位于 release/Epassword-Chrome-1.1.0.zip。测试使用独立浏览器配置、模拟 HTTPS 网页和测试密码库，不访问个人 Chrome 数据。无法下载时，可用 EPASSWORD_TEST_CHROME 指定已有 Chrome for Testing / Chromium 可执行文件；正式版 Chrome 可能不允许命令行加载插件。EPASSWORD_TEST_RUNTIME 可指定打包后的桌面端程序。
+ZIP 位于 release/Epassword-Chrome-1.2.0.zip。测试使用独立浏览器配置、模拟 HTTPS 网页和测试密码库，不访问个人 Chrome 数据。无法下载时，可用 EPASSWORD_TEST_CHROME 指定已有 Chrome for Testing / Chromium 可执行文件；正式版 Chrome 可能不允许命令行加载插件。EPASSWORD_TEST_RUNTIME 可指定打包后的桌面端程序。
 
 [返回 Wiki](Home-zh-CN.md)

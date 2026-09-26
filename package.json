@@ -1,6 +1,6 @@
 {
   "name": "epassword",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Local Excel-backed password manager",
   "main": "electron/main.cjs",
   "author": "Epassword",
@@ -21,7 +21,8 @@
     "test:browser": "node tests/browser-desktop.cjs",
     "pack:setup": "node scripts/pack-setup.cjs",
     "test:installer": "node tests/installer-smoke.cjs",
-    "install:local": "node scripts/install.cjs"
+    "install:local": "node scripts/install.cjs",
+    "test:api": "node tests/api-desktop.cjs"
   },
   "dependencies": {
     "exceljs": "4.4.0",
