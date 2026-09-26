@@ -18,7 +18,7 @@ function validate(items) {
 }
 async function encode(items, password, {encrypted=true}={}) {
  validate(items);
- if (encrypted && (typeof password !== 'string' || password.length < 12 || password.length > 255)) throw Error('主密码需要 12–255 个字符');
+ if (encrypted && (typeof password !== 'string' || password.length < 8 || password.length > 255)) throw Error('主密码需要 8–255 个字符');
  const book = new ExcelJS.Workbook();
  const sheet = book.addWorksheet('密码库', {views:[{state:'frozen',ySplit:1}]});
  sheet.columns = Object.entries(columns).map(([key,header]) => ({key,header,width:key==='notes'?55:28}));

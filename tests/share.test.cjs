@@ -25,3 +25,5 @@ test('share handlers: metadata preview, fresh IDs, copy and locked state',async(
  const pending=c['share-create'](null,{id:item.id,password});vault.items=null;vault.generation++;handlers.clear();
  await assert.rejects(pending,/locked/);assert.throws(()=>c['share-copy'](),/locked/);
 });
+
+test('sharing accepts 8 characters and rejects 7',async()=>{const cipher=await encryptItem(item,'Sharing8');assert.deepEqual(await decryptItem(cipher,'Sharing8'),item);await assert.rejects(encryptItem(item,'1234567'),/8–255/);});

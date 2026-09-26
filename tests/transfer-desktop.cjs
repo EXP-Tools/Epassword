@@ -7,7 +7,7 @@ const path=require('node:path'),fs=require('node:fs/promises');
  try{
  const page=await app.firstWindow();await page.locator('#master').waitFor();
  await page.evaluate(async file=>{
-  const result=await epassword.call('unlock',{mode:'create',path:file,password:'Transfer-test-master!'});state.path=file;state.items=result.items;
+  const result=await epassword.call('unlock',{mode:'create',path:file,password:'Master8!'});state.path=file;state.items=result.items;
   for(const title of ['示例邮箱','示例网站'])state.items=await epassword.call('save',{id:'',title,category:'登录信息',username:'demo@example.com',password:'Fictional-only-123!',url:'https://example.com',notes:'',tags:'',favorite:'false',archived:'false',deleted:'false',created:'',updated:'',fields:[]});
   render();
  },path.join(dir,'vault.xlsx'));
@@ -16,10 +16,10 @@ const path=require('node:path'),fs=require('node:fs/promises');
  await expect(page.locator('#export-encrypted')).toBeChecked();
  await page.locator('#transfer-all').uncheck();await expect(page.locator('#transfer-count')).toHaveText('已选 0 / 2 个项目');
  await page.locator('[name=transfer-id]').first().check();
- await page.locator('#export-password').fill('Separate-export-123!');await page.locator('#export-confirm').fill('Separate-export-123!');
+ await page.locator('#export-password').fill('Export8!');await page.locator('#export-confirm').fill('Export8!');
  await page.screenshot({path:path.join(dir,'export.png')});
  await page.locator('#export-form [type=submit]').click();await expect(page.locator('#toast')).toHaveText('已导出 1 个项目');
- await page.locator('#import-excel').click();await page.locator('#import-password').fill('Separate-export-123!');await page.locator('#import-preview').click();
+ await page.locator('#import-excel').click();await page.locator('#import-password').fill('Export8!');await page.locator('#import-preview').click();
  await expect(page.locator('#transfer-count')).toHaveText('已选 1 / 1 个项目');
  await page.screenshot({path:path.join(dir,'import.png')});
  await page.locator('#import-confirm').click();await expect(page.locator('#toast')).toHaveText('已导入 1 个项目');await expect(page.locator('.item')).toHaveCount(3);

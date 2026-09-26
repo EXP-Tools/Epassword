@@ -2,7 +2,7 @@ const {randomBytes,scrypt,createCipheriv,createDecipheriv}=require('node:crypto'
 const {promisify}=require('node:util');
 const {validate,columns}=require('./vault.cjs');
 const derive=promisify(scrypt),MAGIC=Buffer.from('EPS1'),MAX=16*1024*1024;
-function passwordCheck(password){if(typeof password!=='string'||password.length<12||password.length>255)throw Error('分享密码需要 12–255 个字符');}
+function passwordCheck(password){if(typeof password!=='string'||password.length<8||password.length>255)throw Error('分享密码需要 8–255 个字符');}
 function cleanItem(item){
  if(!item||typeof item!=='object'||Array.isArray(item))throw Error('分享项目格式无效');
  const value=Object.fromEntries(Object.keys(columns).map(k=>[k,item[k]]));

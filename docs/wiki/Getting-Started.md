@@ -19,7 +19,7 @@ Use Node.js 24.x. Repository access is required. Prebuilt apps need neither Node
 
 1. Select “创建密码库”.
 2. Choose a new .xlsx file in a data directory you control.
-3. Set and confirm a 12–255 character master password.
+3. Set and confirm a 8–255 character master password.
 4. Create an item and save it.
 
 Keep the file outside directories that get regenerated during development. The app does not offer password reset or cloud recovery.

@@ -10,3 +10,5 @@
 .sponsor-codes{display:flex;justify-content:center;gap:20px;flex-wrap:wrap}.sponsor-codes figure{margin:0;text-align:center}.sponsor-codes figcaption{font-weight:600;margin:12px 0}.sponsor-codes img{display:block;background:white;max-width:100%;height:auto}.sponsor-codes p{font-size:12px;color:#6d7890;margin:10px 0}
 
 .transfer-list{max-height:260px;overflow:auto;border:1px solid #dbe1ec;border-radius:8px;padding:8px}.transfer-item{display:flex;align-items:center;gap:12px;padding:8px;margin:0}.transfer-item input,.transfer-option input,.transfer-select input{width:auto;flex:none}.transfer-item small{display:block;margin-top:4px}.transfer-item span{overflow-wrap:anywhere;min-width:0}.transfer-select{display:flex;justify-content:space-between;align-items:center;margin:10px 0}.transfer-select label{margin:0}.transfer-option{display:flex;align-items:center;gap:8px}[hidden]{display:none!important}
+
+.transfer-header{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:20px}.transfer-header h2{margin:0;min-width:0}.transfer-header button{flex-shrink:0;margin-left:auto}

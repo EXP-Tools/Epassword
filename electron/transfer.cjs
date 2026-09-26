@@ -27,7 +27,7 @@ function transferHandlers({vault,dialog,getWindow,requireUnlocked,touch,mutate,p
    if(!options||!Array.isArray(options.ids)||!options.ids.length||typeof options.encrypted!=='boolean')throw Error('请选择要导出的项目');
    const ids=new Set(options.ids);const items=vault.items.filter(i=>ids.has(i.id));
    if(items.length!==ids.size)throw Error('项目已变化，请重新选择');
-   if(options.encrypted&&(typeof options.password!=='string'||options.password.length<12||options.password.length>255))throw Error('导出主密码需要 12–255 个字符');
+   if(options.encrypted&&(typeof options.password!=='string'||options.password.length<8||options.password.length>255))throw Error('导出主密码需要 8–255 个字符');
    const result=await dialog.showSaveDialog(getWindow(),{title:'导出 Excel（请选择新文件名）',defaultPath:'Epassword-export.xlsx',filters:[{name:'Excel',extensions:['xlsx']}]});
    check(generation);if(result.canceled)return {canceled:true};
    const data=await encode(items,options.password,{encrypted:options.encrypted});

@@ -58,7 +58,7 @@ Source builds must also satisfy the operating-system requirements of Node.js its
 1. Obtain a complete build from a trusted source. Workflow artifacts, when successfully built, are available from this repository's Actions runs.
 2. For a directory build, keep the whole win-unpacked directory and launch Epassword.exe. The EXE alone is not enough.
 3. Choose “创建密码库” to create a new .xlsx vault, or “打开密码库” to open an existing Epassword vault.
-4. Enter the master password yourself. New vault passwords must contain 12–255 characters.
+4. Enter the master password yourself. New vault passwords must contain 8–255 characters.
 
 The directory build needs no installer. Current Windows builds are not code-signed. Check the source of a downloaded binary rather than disabling operating-system protections.
 

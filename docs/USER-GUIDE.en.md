@@ -16,7 +16,7 @@ The combined installer includes desktop, Chrome extension files and the API clie
 
 1. Select 创建密码库 (Create vault).
 2. Choose a new .xlsx location outside the application installation folder.
-3. Enter and confirm a 12–255 character master password.
+3. Enter and confirm a 8–255 character master password.
 4. Click 创建密码库.
 
 For an existing Epassword workbook, select 打开密码库 (Open vault), choose the file and enter its master password. The last successfully opened or created path is remembered; the password is not. Click the file selector again if the file moves. Create mode clears the selection; returning to Open restores the recent path.
@@ -98,7 +98,7 @@ Import/export is included in the 1.1 installers.
 
 1. Unlock the vault and choose 导出 Excel in the sidebar.
 2. Select individual items or 全选 (Select all). Archived/trash entries are included and labeled.
-3. Encryption is enabled by default. Enter and confirm a separate 12–255 character password for the exported file. This does not change the current vault password.
+3. Encryption is enabled by default. Enter and confirm a separate 8–255 character password for the exported file. This does not change the current vault password.
 4. Disable encryption for a plain workbook. Anyone with access can read passwords, notes and OTP setup secrets.
 5. Choose 导出所选项目 and a new filename. Existing files are never overwritten.
 
@@ -122,7 +122,7 @@ Both sender and recipient need Epassword 1.2 or newer.
 
 ![Encrypted single-item sharing](screenshots/share.png)
 
-Select an item and click 分享 (Share). Set and confirm an independent 12–255 character sharing password, click 生成分享密文, then 复制密文. Send the hexadecimal string and communicate the password separately; never send the vault master password.
+Select an item and click 分享 (Share). Set and confirm an independent 8–255 character sharing password, click 生成分享密文, then 复制密文. Send the hexadecimal string and communicate the password separately; never send the vault master password.
 
 ### Recipient: decrypt and import
 

@@ -73,7 +73,7 @@ The development environment uses Node.js 24.x. Install dependencies on each oper
 
 If you already have a Windows directory build, open release/win-unpacked/Epassword.exe and keep the entire directory together. Mac DMG/ZIP builds must be produced on a Mac or a Mac CI runner; choose the package matching your chip.
 
-On first launch, choose “创建密码库” (Create vault), select a new .xlsx location, and set a 12–255 character master password. Choose “打开密码库” (Open vault) for an existing Epassword workbook.
+On first launch, choose “创建密码库” (Create vault), select a new .xlsx location, and set a 8–255 character master password. Choose “打开密码库” (Open vault) for an existing Epassword workbook.
 
 Excel is not required to run the app. It is needed only for independent Excel recovery or native compatibility tests. Build output is not committed to this repository; see the [Actions workflow](.github/workflows/build.yml) for build artifacts when available.
 

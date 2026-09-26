@@ -8,7 +8,7 @@ Derivation: scrypt(password UTF-8, salt, N=32768, r=8, p=1), 32-byte output, 64 
 
 The UTF-8 JSON plaintext is { "format": "Epassword item", "version": 1, "item": { ... } }. Only the documented vault columns and custom-field id/type/label/value are serialized. Unknown properties are discarded. Decrypted items use the existing vault validation; importing regenerates project and custom-field IDs and appends the result to the encrypted destination vault. OTP setup values are included, not just current codes.
 
-Passwords require 12–255 characters. Plaintext is capped at 16 MiB. The importer verifies authentication before parsing JSON and exposes only title/account metadata for preview. Preview expires after five minutes; locking invalidates previews and generated shares retained in memory. This is not expiration of copies already sent.
+Passwords require 8–255 characters. Plaintext is capped at 16 MiB. The importer verifies authentication before parsing JSON and exposes only title/account metadata for preview. Preview expires after five minutes; locking invalidates previews and generated shares retained in memory. This is not expiration of copies already sent.
 
 Offline shares cannot be remotely revoked and do not expire. Send ciphertext and password separately. Recipient copies remain readable with the original sharing password even if the sender changes passwords later.
 

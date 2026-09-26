@@ -50,7 +50,7 @@ bash install.command --no-launch --no-shortcuts --install-dir "$HOME/Application
 
 1. 获取可信来源提供的完整 Windows 文件夹版。当前工作区的位置是 `release/win-unpacked/`。
 2. 将整个文件夹放到固定位置，双击其中的 `Epassword.exe`。不要单独复制 EXE，旁边的资源和运行时文件也必须保留。
-3. 选择“创建密码库”，指定新的 `.xlsx` 文件位置，设置并确认 12–255 个字符的主密码。
+3. 选择“创建密码库”，指定新的 `.xlsx` 文件位置，设置并确认 8–255 个字符的主密码。
 4. 已有 Epassword 密码库时，选择“打开密码库”并输入原主密码。普通 Excel 文件不能直接作为密码库导入。
 
 文件夹版无需安装向导，可离线使用。程序尚未代码签名；遇到 Windows 来源提示时先核实来源，不要为运行程序关闭系统安全防护。
