@@ -2,11 +2,11 @@
 
 **简体中文** | [English](USER-GUIDE.en.md) · [返回 README](../README.md) · [安装指南](../INSTALL.md)
 
-适用于 Epassword 1.2。界面截图来自 Windows 上运行的真实 Electron 应用，账号、邮箱、密码和 OTP 配置均为虚构示例。Mac 的主要操作相同，快捷键使用 Command 替代 Ctrl。点击图片可查看大图。
+适用于 Epassword 1.3，仅支持 Windows 和 macOS 桌面端，不提供移动客户端。界面截图来自 Windows 上运行的真实 Electron 应用，账号、邮箱、密码和 OTP 配置均为虚构示例。Mac 的主要操作相同，快捷键使用 Command 替代 Ctrl。点击图片可查看大图。
 
 ## 1. 安装并启动
 
-从 [Release 1.2](https://github.com/EXP-Tools/Epassword/releases/tag/v1.2.0) 下载与你的系统对应的 **Epassword-Setup** ZIP，完整解压。Windows 运行 **install.cmd**，Mac 运行 **bash install.command**。安装器同时复制桌面应用、插件文件及 API 客户端；Chrome 插件仍需手动启用，见第 6 节。
+从 [Release 1.3](https://github.com/EXP-Tools/Epassword/releases/tag/v1.3.0) 下载与你的系统对应的 **Epassword-Setup** ZIP，完整解压。Windows 运行 **install.cmd**，Mac 运行 **bash install.command**。安装器同时复制桌面应用、插件文件及 API 客户端；Chrome 插件仍需手动启用，见第 6 节。
 
 Mac Intel 选 x64，Apple Silicon 选 arm64。Mac 包未经过 Apple 公证；详细要求和安装排错见[安装指南](../INSTALL.md)。
 
@@ -195,11 +195,11 @@ AI 接入由本地工具完成，并非在应用中直接聊天。请求示例�
 
 截图重新生成方法：在独立开发环境执行 node scripts/capture-screenshots.cjs，脚本使用 test-results 下的虚构密码库与隔离配置，不读取你的真实密码库。
 
-## 局域网分享（当前源码新增）
+## 局域网分享（1.3 新增）
 
 ![局域网设备互认与接收确认](screenshots/lan-sharing.png)
 
-两台电脑都安装新版 Epassword、连接同一局域网，并解锁各自的密码库。
+两台电脑都安装 Epassword 1.3 或更新版本、连接同一局域网，并解锁各自的密码库。
 
 1. A 打开侧栏「局域网分享」，点击「临时开启服务」。
 2. B 点击「搜索局域网服务」，选择 A；也可以填写 A 显示的 IPv4 地址和端口，点击「请求连接」。
@@ -212,7 +212,7 @@ AI 接入由本地工具完成，并非在应用中直接聊天。请求示例�
 
 发现服务使用 UDP 29745，实际传输使用界面显示的临时 TCP 端口。防火墙需允许 Epassword 的专用/局域网连接；访客 Wi-Fi 的设备隔离、跨子网或禁用广播可能导致搜索失败，可尝试填写地址。仅支持局域网 IPv4，不使用公网中转。设备名和服务地址是发现信息；项目数据在设备互认后加密传输。
 
-## 项目右键菜单（当前源码新增）
+## 项目右键菜单（1.3 新增）
 
 在中间项目列表右键项目，或聚焦项目后按 Shift+F10：
 
@@ -221,7 +221,7 @@ AI 接入由本地工具完成，并非在应用中直接聊天。请求示例�
 - **归档 / 取消归档**：调整项目的归档状态。
 - **彻底删除**：二次确认后删除当前密码库中的项目及历史，无法在应用中恢复。已有备份和导出文件可能仍保留旧内容。
 
-## 查看历史密码（当前源码新增）
+## 查看历史密码（1.3 新增）
 
 ![密码历史记录](screenshots/password-history.png)
 

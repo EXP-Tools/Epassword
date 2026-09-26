@@ -2,11 +2,11 @@
 
 [简体中文](USER-GUIDE.md) | **English** · [README](../README.en.md) · [Installation](../INSTALL.en.md)
 
-For Epassword 1.2. These are real Electron screenshots captured on Windows with fictional accounts and OTP configuration. The UI is currently Chinese. On Mac, use Command instead of Ctrl. Click an image to enlarge it.
+For Epassword 1.3 on Windows and macOS desktop only; no mobile client is provided. These are real Electron screenshots captured on Windows with fictional accounts and OTP configuration. The UI is currently Chinese. On Mac, use Command instead of Ctrl. Click an image to enlarge it.
 
 ## 1. Install and open
 
-Download the matching Epassword-Setup ZIP from [Release 1.2](https://github.com/EXP-Tools/Epassword/releases/tag/v1.2.0). Extract everything, then run install.cmd on Windows or bash install.command on Mac. Choose x64 for Intel Macs and arm64 for Apple Silicon. Mac packages are not notarized. See [installation instructions](../INSTALL.en.md) for requirements.
+Download the matching Epassword-Setup ZIP from [Release 1.3](https://github.com/EXP-Tools/Epassword/releases/tag/v1.3.0). Extract everything, then run install.cmd on Windows or bash install.command on Mac. Choose x64 for Intel Macs and arm64 for Apple Silicon. Mac packages are not notarized. See [installation instructions](../INSTALL.en.md) for requirements.
 
 The combined installer includes desktop, Chrome extension files and the API client. Chrome still requires manual activation and pairing.
 
@@ -178,11 +178,11 @@ Choose 打赏作者 in the desktop sidebar or extension and scan with Alipay or 
 
 To regenerate screenshots, run node scripts/capture-screenshots.cjs in an isolated development environment. It uses a fictional workbook and profile under test-results.
 
-## LAN sharing (new in current source)
+## LAN sharing (new in 1.3)
 
 ![LAN pairing and receipt confirmation](screenshots/lan-sharing.png)
 
-Unlock a vault on each computer running the updated Epassword on the same LAN.
+Unlock a vault on each computer running Epassword 1.3 or later on the same LAN.
 
 1. On A, open 局域网分享 and click 临时开启服务.
 2. On B, search for the service or enter A's displayed IPv4 address and TCP port.
@@ -195,7 +195,7 @@ The service closes after five minutes without pairing, or five minutes without a
 
 Discovery uses UDP 29745; encrypted transfers use the temporary TCP port shown in the UI. Allow Epassword through the private-network firewall. Guest Wi-Fi isolation, routed subnets or blocked broadcasts can prevent discovery; try direct IP entry. LAN IPv4 only, with no public relay. Service discovery exposes device names and addresses; item traffic is encrypted after mutual verification.
 
-## Item context menu (new in current source)
+## Item context menu (new in 1.3)
 
 Right-click an item or focus it and press Shift+F10:
 
@@ -204,7 +204,7 @@ Right-click an item or focus it and press Shift+F10:
 - Archive / unarchive changes its archive state.
 - Permanently delete requires confirmation and removes the item and its history from the current vault. Existing backups and exports may still contain previous data.
 
-## Password history (new in current source)
+## Password history (new in 1.3)
 
 ![Password history](screenshots/password-history.png)
 

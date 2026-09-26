@@ -18,7 +18,7 @@ async function packSetup() {
   if(platform==='win32')archive.directory(app,'desktop');
   else archive.directory(path.join(app,'Epassword.app'),'desktop/Epassword.app');
   archive.append(JSON.stringify({version,platform,arch,apiIncluded:true},null,2),{name:'setup.json'});
-  for(const file of ['scripts/install.cjs','INSTALL.md','INSTALL.en.md','INSTALL.zh-CN.md','README.md','README.en.md','README.zh-CN.md','integrations/epassword-client.cjs','docs/API.md','docs/API.zh-CN.md','docs/openapi.json','docs/USER-GUIDE.md','docs/USER-GUIDE.en.md','docs/SHARING.md'])
+  for(const file of ['scripts/install.cjs','INSTALL.md','INSTALL.en.md','INSTALL.zh-CN.md','README.md','README.en.md','README.zh-CN.md','integrations/epassword-client.cjs','docs/API.md','docs/API.zh-CN.md','docs/openapi.json','docs/USER-GUIDE.md','docs/USER-GUIDE.en.md','docs/SHARING.md','docs/LAN-SHARING.md'])
    archive.file(path.join(root,file),{name:file});
   for(const file of fs.readdirSync(path.join(root,'docs/wiki')).filter(f=>f.endsWith('.md')))
    archive.file(path.join(root,'docs/wiki',file),{name:'docs/wiki/'+file});

@@ -10,7 +10,7 @@
 
 ## 桌面应用 + Chrome 插件一体安装（推荐）
 
-从 [Release 1.2](https://github.com/EXP-Tools/Epassword/releases/tag/v1.2.0) 下载 **Epassword-Setup-1.2.0-win-x64.zip**、**Epassword-Setup-1.2.0-mac-x64.zip** 或 **Epassword-Setup-1.2.0-mac-arm64.zip**。完整解压到下载/临时目录，关闭 Epassword，然后：
+从 [Release 1.3](https://github.com/EXP-Tools/Epassword/releases/tag/v1.3.0) 下载 **Epassword-Setup-1.3.0-win-x64.zip**、**Epassword-Setup-1.3.0-mac-x64.zip** 或 **Epassword-Setup-1.3.0-mac-arm64.zip**。完整解压到下载/临时目录，关闭 Epassword，然后：
 
 - Windows：双击 **install.cmd**。
 - Mac：在解压目录运行 **bash install.command**，或双击具有执行权限的安装入口。
@@ -372,3 +372,7 @@ ZIP 是开发者模式使用的已解压扩展文件包，需先解压，不是 
 ## 本机程序 API
 
 一体安装包同时安装 integrations/ 下的 Node.js 客户端、OpenAPI 定义及双语指南。桌面设置中逐个授权本机程序访问明确的 HTTPS 网站，将 EPASSWORD_API_TOKEN 仅放在调用进程环境中，不使用主密码或 Chrome 配对码。[API 说明](docs/API.zh-CN.md)。
+
+## 升级到 1.3
+
+先将密码库备份到安装目录之外，关闭 Epassword，再运行新版一体安装器。原有密码库和主密码继续可用。局域网分享的双方均需使用 1.3 或更新版本。保存密码历史后，请不要再用旧版 Epassword 编辑该文件，旧版会丢弃历史工作表。本项目仅提供桌面安装包，不提供 Android、鸿蒙或 iOS 版本。

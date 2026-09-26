@@ -10,22 +10,22 @@ The three-column interface is inspired by 1Password. Epassword is an independent
 
 [Installation](INSTALL.en.md) · [安装指南](INSTALL.md) · [Project Wiki](docs/wiki/Home.md) · [中文 Wiki](docs/wiki/Home-zh-CN.md)
 
-## Download 1.2
+## Download 1.3
 
-Current release: [Epassword 1.2](https://github.com/EXP-Tools/Epassword/releases/tag/v1.2.0). Combined installers include the desktop app and Chrome extension files.
+Current release: [Epassword 1.3](https://github.com/EXP-Tools/Epassword/releases/tag/v1.3.0). Combined installers include the desktop app and Chrome extension files.
 
 | Platform | Download |
 | --- | --- |
-| Windows x64 | [Epassword-Setup-1.2.0-win-x64.zip](https://github.com/EXP-Tools/Epassword/releases/download/v1.2.0/Epassword-Setup-1.2.0-win-x64.zip) |
-| Mac Intel | [Epassword-Setup-1.2.0-mac-x64.zip](https://github.com/EXP-Tools/Epassword/releases/download/v1.2.0/Epassword-Setup-1.2.0-mac-x64.zip) |
-| Mac Apple Silicon | [Epassword-Setup-1.2.0-mac-arm64.zip](https://github.com/EXP-Tools/Epassword/releases/download/v1.2.0/Epassword-Setup-1.2.0-mac-arm64.zip) |
+| Windows x64 | [Epassword-Setup-1.3.0-win-x64.zip](https://github.com/EXP-Tools/Epassword/releases/download/v1.3.0/Epassword-Setup-1.3.0-win-x64.zip) |
+| Mac Intel | [Epassword-Setup-1.3.0-mac-x64.zip](https://github.com/EXP-Tools/Epassword/releases/download/v1.3.0/Epassword-Setup-1.3.0-mac-x64.zip) |
+| Mac Apple Silicon | [Epassword-Setup-1.3.0-mac-arm64.zip](https://github.com/EXP-Tools/Epassword/releases/download/v1.3.0/Epassword-Setup-1.3.0-mac-arm64.zip) |
 
-[Chrome extension](https://github.com/EXP-Tools/Epassword/releases/download/v1.2.0/Epassword-Chrome-1.2.0.zip) · [SHA256SUMS.txt](https://github.com/EXP-Tools/Epassword/releases/download/v1.2.0/SHA256SUMS.txt)
+[Chrome extension](https://github.com/EXP-Tools/Epassword/releases/download/v1.3.0/Epassword-Chrome-1.3.0.zip) · [SHA256SUMS.txt](https://github.com/EXP-Tools/Epassword/releases/download/v1.3.0/SHA256SUMS.txt)
 
 Extract the entire ZIP, then run install.cmd on Windows or bash install.command on Mac. Chrome activation and pairing remain manual. Mac packages are not Apple-notarized.
 
 
-Current source adds consent-based LAN sharing, item context menus and encrypted password history. See the [user guide](docs/USER-GUIDE.en.md). These changes are not included in the existing 1.2 release.
+**New in 1.3:** LAN sharing with six-digit mutual verification, bidirectional multi-item pushes and recipient approval; item context menus for duplicate, move, archive and permanent deletion; encrypted history for item and custom password fields. See the [user guide](docs/USER-GUIDE.en.md).
 
 ## Screenshots and user guide
 
@@ -43,13 +43,13 @@ Explore more use cases in the [GitHub Pages interactive demo](https://exp-tools.
 | macOS Intel / x64 | Built and smoke-tested on macOS CI; physical-device QR/Excel validation pending |
 | macOS Apple Silicon / arm64 | Built and smoke-tested on macOS CI; physical-device QR/Excel validation pending |
 
-macOS requires version 12 or later for the bundled Electron runtime. Source builds must also meet the requirements of the installed Node.js version. Linux is not a supported target.
+macOS requires version 12 or later for the bundled Electron runtime. Source builds must also meet the requirements of the installed Node.js version. Epassword is desktop-only: Windows x64 and macOS Intel/Apple Silicon. Android, HarmonyOS and iOS clients are not planned; Linux is not a supported target.
 
-Windows and Mac use the same workbook format and master password. Copy your workbook manually to move between devices; there is no automatic synchronization.
+Windows and Mac use the same workbook format and master password. Move the workbook manually or push selected items over the LAN; there is no automatic synchronization.
 
 ## Install desktop and Chrome extension together
 
-Download the matching Epassword-Setup ZIP from [Releases](https://github.com/EXP-Tools/Epassword/releases/tag/v1.2.0), extract it, and run install.cmd (Windows) or bash install.command (Mac). The included runtime installs both components without Node.js. Follow the generated guide to enable the plugin in Chrome and pair it. [Combined installation](INSTALL.en.md#combined-desktop--chrome-installation-recommended).
+Download the matching Epassword-Setup ZIP from [Releases](https://github.com/EXP-Tools/Epassword/releases/tag/v1.3.0), extract it, and run install.cmd (Windows) or bash install.command (Mac). The included runtime installs both components without Node.js. Follow the generated guide to enable the plugin in Chrome and pair it. [Combined installation](INSTALL.en.md#combined-desktop--chrome-installation-recommended).
 
 ## Quick start
 
@@ -84,6 +84,9 @@ Excel is not required to run the app. It is needed only for independent Excel re
 | OTP import | Base32 setup secrets, otpauth://totp links, screen QR scanning and QR image import |
 | Local checks | Short and reused passwords; no online breach lookup |
 | Locking | Manual lock, five-minute inactivity lock, system lock and sleep |
+| LAN sharing | Discovery or direct IPv4 entry; six-digit mutual verification; selected pushes require recipient approval; five-minute timeout |
+| Context menu | Duplicate, change category, archive / unarchive and confirmed permanent deletion |
+| Password history | Timestamped saved versions of item and custom passwords, encrypted in the same Excel workbook |
 | File handling | Encrypted previous-save backup and detection of external file changes |
 
 Credit-card and identity details use notes and custom fields. Search covers titles, usernames, URLs and tags, not custom-field values.
@@ -189,7 +192,7 @@ start.command   Mac source launcher
 
 ## Limitations
 
-No cloud sync, attachments, sharing, passkeys or online breach lookup. Epassword has not received an independent security audit and does not claim security parity with 1Password.
+Offline encrypted item sharing and consent-based LAN pushes are supported. There is no cloud sync, shared team vault, attachment support, passkey storage or online breach lookup. Epassword has not received an independent security audit and does not claim security parity with 1Password.
 
 The renderer has Node integration disabled, context isolation and sandbox enabled, and does not load remote content. Unlocked credentials exist in process memory. The app does not write them to application logs or browser local storage, but JavaScript strings and OS clipboard history cannot be guaranteed to be physically erased. The optional extension holds pairing credentials and pending registrations in memory-only browser session storage. Opening a saved URL uses the system browser.
 

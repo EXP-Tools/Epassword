@@ -8,7 +8,7 @@ After installation, follow the [illustrated user guide](docs/USER-GUIDE.en.md).
 
 ## Combined desktop + Chrome installation (recommended)
 
-Download **Epassword-Setup-1.2.0-win-x64.zip**, **Epassword-Setup-1.2.0-mac-x64.zip**, or **Epassword-Setup-1.2.0-mac-arm64.zip** from [Release 1.2](https://github.com/EXP-Tools/Epassword/releases/tag/v1.2.0). Extract the entire ZIP into a temporary/download folder, close Epassword, then:
+Download **Epassword-Setup-1.3.0-win-x64.zip**, **Epassword-Setup-1.3.0-mac-x64.zip**, or **Epassword-Setup-1.3.0-mac-arm64.zip** from [Release 1.3](https://github.com/EXP-Tools/Epassword/releases/tag/v1.3.0). Extract the entire ZIP into a temporary/download folder, close Epassword, then:
 
 - Windows: double-click **install.cmd**.
 - Mac: run **bash install.command** in the extracted directory (or double-click the executable launcher).
@@ -348,3 +348,7 @@ The ZIP is an unpacked-development extension archive, not a Chrome Web Store rel
 ## Local program API
 
 Combined installs also place the Node.js client, OpenAPI contract and bilingual API guide under integrations/. In desktop Settings, authorize each local program for explicit HTTPS sites. Set EPASSWORD_API_TOKEN only in the caller's environment; do not use your master password or Chrome pairing code. [API instructions](docs/API.md).
+
+## Upgrade to 1.3
+
+Back up your workbook outside the installation directory, close Epassword, then run the new combined installer. Existing vaults remain compatible and keep their master password. Use 1.3 or later on both ends for LAN sharing. Once password history has been saved, do not edit that workbook with older app versions: they discard the history worksheet. There are no Android, HarmonyOS or iOS installers.

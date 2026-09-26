@@ -17,3 +17,5 @@ Offline shares cannot be remotely revoked and do not expire. Send ciphertext and
 单项配置序列化为 JSON 后，经 scrypt 派生密钥与 AES-256-GCM 加密，输出十六进制封装。包含自定义字段和 OTP 设置密钥。每次生成随机盐和 nonce；错误密码或密文篡改无法通过认证。导入预览不暴露密码，确认后追加新 ID 项目。
 
 临时分享密码不会改变密码库主密码，也不代表自动过期。已发送的离线密文无法撤销；请将密文与分享密码分开传递。
+
+Version 1.3 recipients assign fresh IDs and update the last-edited timestamp to receipt time. Password history is excluded from single-item shares; the receiving vault starts recording its own history from the received current value.
