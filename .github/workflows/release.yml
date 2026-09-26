@@ -1,0 +1,92 @@
+name: Publish verified release
+on:
+  workflow_dispatch:
+    inputs:
+      build_run:
+        description: Successful Desktop builds run ID
+        required: true
+      target_sha:
+        description: Exact commit built by that run
+        required: true
+      tag:
+        description: Existing draft release tag
+        required: true
+        default: v1.0.0
+permissions:
+  actions: read
+  contents: write
+concurrency:
+  group: publish-release
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+      BUILD_RUN: ${{ inputs.build_run }}
+      TARGET_SHA: ${{ inputs.target_sha }}
+      RELEASE_TAG: ${{ inputs.tag }}
+    steps:
+      - name: Verify successful build and draft target
+        shell: bash
+        run: |
+          set -euo pipefail
+          gh api "repos/$GH_REPO/actions/runs/$BUILD_RUN" > run.json
+          gh release view "$RELEASE_TAG" --json isDraft,targetCommitish > release.json
+          python3 - <<'PY'
+          import json, os
+          run=json.load(open('run.json'))
+          release=json.load(open('release.json'))
+          assert run['conclusion']=='success' and run['status']=='completed'
+          assert run['head_sha']==os.environ['TARGET_SHA']
+          assert run['path']=='.github/workflows/build.yml'
+          assert run['event'] in ('push','workflow_dispatch')
+          assert run['head_repository']['full_name']==os.environ['GH_REPO']
+          assert release['isDraft'] and release['targetCommitish']==os.environ['TARGET_SHA']
+          PY
+      - uses: actions/download-artifact@v4
+        with:
+          github-token: ${{ github.token }}
+          run-id: ${{ inputs.build_run }}
+          pattern: Epassword-*
+          path: artifacts
+      - name: Collect assets and checksums
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import pathlib, shutil, hashlib, os, re, zipfile
+          version=os.environ['RELEASE_TAG'].removeprefix('v')
+          assert re.fullmatch(r'[0-9]+\.[0-9]+\.[0-9]+',version)
+          out=pathlib.Path('assets');out.mkdir()
+          platforms=['win-x64','mac-x64','mac-arm64']
+          for platform in platforms:
+              folder=pathlib.Path('artifacts')/('Epassword-'+platform)
+              setup=folder/('Epassword-Setup-'+version+'-'+platform+'.zip')
+              assert setup.is_file()
+              with zipfile.ZipFile(setup) as z:
+                  for name in ['README.md','README.en.md','INSTALL.md','INSTALL.en.md','extension/assets/sponsor-alipay.png','extension/assets/sponsor-wechat.png']:
+                      assert name in z.namelist(), name
+                  assert '简体中文' in z.read('README.md').decode('utf-8')
+              for file in folder.iterdir():
+                  if file.name.startswith('Epassword-Chrome-') and platform!='win-x64': continue
+                  assert file.suffix in ('.zip','.dmg','.exe')
+                  assert version in file.name
+                  assert not (out/file.name).exists()
+                  shutil.copy2(file,out/file.name)
+          with (out/'SHA256SUMS.txt').open('w') as sums:
+              for file in sorted(out.iterdir()):
+                  if file.name=='SHA256SUMS.txt': continue
+                  h=hashlib.sha256()
+                  with file.open('rb') as data:
+                      for block in iter(lambda:data.read(1024*1024),b''): h.update(block)
+                  sums.write(h.hexdigest()+'  '+file.name+'\n')
+          PY
+      - name: Upload all assets then publish
+        shell: bash
+        run: |
+          set -euo pipefail
+          gh release upload "$RELEASE_TAG" assets/* --clobber
+          gh release edit "$RELEASE_TAG" --draft=false --latest
