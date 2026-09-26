@@ -1,5 +1,7 @@
 # Epassword
 
+
+[Interactive product preview](https://exp-tools.github.io/Epassword/) · Explore the vault, generator, export and sharing flows.
 **English** | [简体中文](README.md)
 
 A local-first desktop password manager built with Electron. Epassword stores passwords and OTP setup secrets in an encrypted Excel workbook. **Your master password is the Excel file-open password:** you can recover your data with Microsoft Excel even without Epassword.

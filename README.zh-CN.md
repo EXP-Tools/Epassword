@@ -1,5 +1,7 @@
 # Epassword
 
+
+[在线交互预览](https://exp-tools.github.io/Epassword/) · 先体验密码库、密码生成、导入导出与分享流程。
 [English](README.en.md) | **简体中文**
 
 [项目 Wiki](docs/wiki/Home-zh-CN.md) · [安装指南](INSTALL.md)
