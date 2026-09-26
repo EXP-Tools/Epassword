@@ -10,7 +10,7 @@
 
 ## 桌面应用 + Chrome 插件一体安装（推荐）
 
-从 [Release 1.0](https://github.com/EXP-Tools/Epassword/releases/tag/v1.0.0) 下载 **Epassword-Setup-1.0.0-win-x64.zip**、**Epassword-Setup-1.0.0-mac-x64.zip** 或 **Epassword-Setup-1.0.0-mac-arm64.zip**。完整解压到下载/临时目录，关闭 Epassword，然后：
+从 [Release 1.1](https://github.com/EXP-Tools/Epassword/releases/tag/v1.1.0) 下载 **Epassword-Setup-1.1.0-win-x64.zip**、**Epassword-Setup-1.1.0-mac-x64.zip** 或 **Epassword-Setup-1.1.0-mac-arm64.zip**。完整解压到下载/临时目录，关闭 Epassword，然后：
 
 - Windows：双击 **install.cmd**。
 - Mac：在解压目录运行 **bash install.command**，或双击具有执行权限的安装入口。

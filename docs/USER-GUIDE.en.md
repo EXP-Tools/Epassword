@@ -2,11 +2,11 @@
 
 [简体中文](USER-GUIDE.md) | **English** · [README](../README.en.md) · [Installation](../INSTALL.en.md)
 
-For Epassword 1.0. These are real Electron screenshots captured on Windows with fictional accounts and OTP configuration. The UI is currently Chinese. On Mac, use Command instead of Ctrl. Click an image to enlarge it.
+For Epassword 1.1. These are real Electron screenshots captured on Windows with fictional accounts and OTP configuration. The UI is currently Chinese. On Mac, use Command instead of Ctrl. Click an image to enlarge it.
 
 ## 1. Install and open
 
-Download the matching Epassword-Setup ZIP from [Release 1.0](https://github.com/EXP-Tools/Epassword/releases/tag/v1.0.0). Extract everything, then run install.cmd on Windows or bash install.command on Mac. Choose x64 for Intel Macs and arm64 for Apple Silicon. Mac packages are not notarized. See [installation instructions](../INSTALL.en.md) for requirements.
+Download the matching Epassword-Setup ZIP from [Release 1.1](https://github.com/EXP-Tools/Epassword/releases/tag/v1.1.0). Extract everything, then run install.cmd on Windows or bash install.command on Mac. Choose x64 for Intel Macs and arm64 for Apple Silicon. Mac packages are not notarized. See [installation instructions](../INSTALL.en.md) for requirements.
 
 The combined installer includes desktop, Chrome extension files and the API client. Chrome still requires manual activation and pairing.
 
@@ -88,9 +88,9 @@ Create the token and supply it only to a trusted local program, outside AI conve
 
 This connects local automation tools; it is not a built-in AI chat. See the [API guide](API.md) for requests and Playwright filling.
 
-## Import and export Excel (new source-build feature)
+## Import and export Excel (new in 1.1)
 
-The published 1.0 installers do not include this feature; use a newer build containing import/export.
+Import/export is included in the 1.1 installers.
 
 ### Export selected items
 

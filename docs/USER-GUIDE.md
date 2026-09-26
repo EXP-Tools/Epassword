@@ -2,11 +2,11 @@
 
 **简体中文** | [English](USER-GUIDE.en.md) · [返回 README](../README.md) · [安装指南](../INSTALL.md)
 
-适用于 Epassword 1.0。界面截图来自 Windows 上运行的真实 Electron 应用，账号、邮箱、密码和 OTP 配置均为虚构示例。Mac 的主要操作相同，快捷键使用 Command 替代 Ctrl。点击图片可查看大图。
+适用于 Epassword 1.1。界面截图来自 Windows 上运行的真实 Electron 应用，账号、邮箱、密码和 OTP 配置均为虚构示例。Mac 的主要操作相同，快捷键使用 Command 替代 Ctrl。点击图片可查看大图。
 
 ## 1. 安装并启动
 
-从 [Release 1.0](https://github.com/EXP-Tools/Epassword/releases/tag/v1.0.0) 下载与你的系统对应的 **Epassword-Setup** ZIP，完整解压。Windows 运行 **install.cmd**，Mac 运行 **bash install.command**。安装器同时复制桌面应用、插件文件及 API 客户端；Chrome 插件仍需手动启用，见第 6 节。
+从 [Release 1.1](https://github.com/EXP-Tools/Epassword/releases/tag/v1.1.0) 下载与你的系统对应的 **Epassword-Setup** ZIP，完整解压。Windows 运行 **install.cmd**，Mac 运行 **bash install.command**。安装器同时复制桌面应用、插件文件及 API 客户端；Chrome 插件仍需手动启用，见第 6 节。
 
 Mac Intel 选 x64，Apple Silicon 选 arm64。Mac 包未经过 Apple 公证；详细要求和安装排错见[安装指南](../INSTALL.md)。
 
@@ -99,9 +99,9 @@ Mac Intel 选 x64，Apple Silicon 选 arm64。Mac 包未经过 Apple 公证；�
 
 AI 接入由本地工具完成，并非在应用中直接聊天。请求示例与 Playwright 填充方法见 [API 文档](API.zh-CN.md)。
 
-## 导入与导出 Excel（新版源码功能）
+## 导入与导出 Excel（1.1 新增）
 
-已发布的 1.0 安装包不包含本节功能，请使用包含导入导出功能的新构建。
+从 1.1 起，一体安装包包含导入导出功能。
 
 ### 导出选中的项目
 
