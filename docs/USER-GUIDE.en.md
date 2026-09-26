@@ -127,7 +127,7 @@ Select an item and click 分享 (Share). Set and confirm an independent 8–255 
 ### Recipient: decrypt and import
 
 1. Unlock your destination vault.
-2. Choose 导入 in the sidebar, then 导入分享密文 in the dialog.
+2. Choose 导入 in the sidebar, then 切换到分享导入 at the top right of the dialog.
 3. Paste the complete hexadecimal string and enter the sender’s sharing password, not your vault master password.
 4. Choose 解密并预览 and check the title and account.
 5. Choose 导入此项目. The new item is appended with a fresh ID and saved under your own vault encryption.
