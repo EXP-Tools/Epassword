@@ -23,6 +23,25 @@ Epassword 使用独立品牌，不关联 1Password 服务。已添加 Windows x6
 完整解压后，Windows 运行 install.cmd，Mac 运行 bash install.command。Chrome 仍需在扩展管理页手动启用并配对。Mac 包未经 Apple 公证。
 
 
+## 界面预览与用户手册
+
+[图文用户使用手册](docs/USER-GUIDE.md) · [English user guide](docs/USER-GUIDE.en.md)
+
+以下为真实应用界面，使用虚构演示数据。完整操作步骤、更多截图及常见问题见用户手册。
+
+### 账号管理
+
+![Epassword 密码库主页](docs/screenshots/vault.png)
+
+### 密码生成
+
+![新建项目与密码生成器](docs/screenshots/editor.png)
+
+### OTP 与屏幕扫码
+
+![OTP 配置与扫码入口](docs/screenshots/otp-setup.png)
+
+
 ## 开始使用
 
 完整安装流程见 **[INSTALL.md](INSTALL.md)**，分别提供人类用户和 AI 的安装、验证、打包与排错步骤。

@@ -23,6 +23,25 @@ First public release: [Epassword 1.0](https://github.com/EXP-Tools/Epassword/rel
 Extract the entire ZIP, then run install.cmd on Windows or bash install.command on Mac. Chrome activation and pairing remain manual. Mac packages are not Apple-notarized.
 
 
+## Screenshots and user guide
+
+[Illustrated user guide](docs/USER-GUIDE.en.md) · [中文用户手册](docs/USER-GUIDE.md)
+
+Real application screenshots with fictional demo data. The guide includes step-by-step instructions, more screenshots and troubleshooting.
+
+### Account management
+
+![Epassword vault](docs/screenshots/vault.png)
+
+### Password generation
+
+![Item editor and password generator](docs/screenshots/editor.png)
+
+### OTP and screen scanning
+
+![OTP setup and scanning controls](docs/screenshots/otp-setup.png)
+
+
 ## Platform status
 
 | Platform | Status |

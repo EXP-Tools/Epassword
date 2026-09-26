@@ -29,3 +29,5 @@ Wiki 源文档维护在 docs/wiki，通过 scripts/render-wiki.cjs 转换后发�
 - [Chrome 浏览器插件](Browser-Extension-zh-CN.md)：安装、配对、填充与注册保存。
 
 - [AI 与程序 API](../API.zh-CN.md)：限网站授权与本机自动化填充。
+
+[图文用户使用手册](../USER-GUIDE.md)

@@ -4,6 +4,8 @@
 
 This guide has separate paths for human users and AI agents. Read [README.en.md](README.en.md) for features and [the wiki](docs/wiki/Home.md) for workflows and recovery. Commands run from the project root unless stated otherwise.
 
+After installation, follow the [illustrated user guide](docs/USER-GUIDE.en.md).
+
 ## Combined desktop + Chrome installation (recommended)
 
 Download **Epassword-Setup-1.0.0-win-x64.zip**, **Epassword-Setup-1.0.0-mac-x64.zip**, or **Epassword-Setup-1.0.0-mac-arm64.zip** from [Release 1.0](https://github.com/EXP-Tools/Epassword/releases/tag/v1.0.0). Extract the entire ZIP into a temporary/download folder, close Epassword, then:

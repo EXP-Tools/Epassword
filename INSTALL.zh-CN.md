@@ -6,6 +6,8 @@
 
 本文分别提供人类用户与 AI 的操作流程。功能与恢复说明见 [README.md](README.md)。命令默认在项目根目录执行。npm / node 命令两平台通用；PowerShell 示例用于 Windows，bash 示例用于 Mac。
 
+安装完成后的操作步骤见[图文用户使用手册](docs/USER-GUIDE.md)。
+
 ## 桌面应用 + Chrome 插件一体安装（推荐）
 
 从 [Release 1.0](https://github.com/EXP-Tools/Epassword/releases/tag/v1.0.0) 下载 **Epassword-Setup-1.0.0-win-x64.zip**、**Epassword-Setup-1.0.0-mac-x64.zip** 或 **Epassword-Setup-1.0.0-mac-arm64.zip**。完整解压到下载/临时目录，关闭 Epassword，然后：

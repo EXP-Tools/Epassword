@@ -29,3 +29,5 @@ These pages are maintained in docs/wiki and rendered for the separate GitHub Wik
 - [Chrome extension](Browser-Extension.md): install, pair, fill and save registrations.
 
 - [AI and program API](../API.md): scoped tokens and local automation filling.
+
+[Illustrated user guide](../USER-GUIDE.en.md)
