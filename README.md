@@ -177,3 +177,5 @@ The renderer has Node integration disabled, context isolation and sandbox enable
 ## Support the author
 
 Choose **打赏作者** in the desktop sidebar or Chrome extension popup to view Alipay and WeChat donation codes. Images are bundled for offline use; donations are optional.
+
+The desktop app remembers the last successfully opened or created vault path on this device. On restart, enter the master password to unlock it; the password is not saved. Click the file selector to choose another file if it has moved.
