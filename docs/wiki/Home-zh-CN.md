@@ -24,9 +24,7 @@ Windows x64 已在本地测试。Mac Intel 和 Apple Silicon 已实现适配与�
 
 ## Wiki 发布位置
 
-Wiki 页面与源码一起保存在公开仓库的 docs/wiki，可直接阅读。原生 Wiki 功能已开启，但独立的 Wiki Git 仓库尚未初始化。
-
-目前实际发布位置是仓库内的文档目录，不依赖原生 Wiki 初始化。
+Wiki 源文档维护在 docs/wiki，通过 scripts/render-wiki.cjs 转换后发布到独立的 GitHub Wiki，并包含安装与 API 指南。参见[发布说明](../WIKI-PUBLISHING.md)。
 
 - [Chrome 浏览器插件](Browser-Extension-zh-CN.md)：安装、配对、填充与注册保存。
 

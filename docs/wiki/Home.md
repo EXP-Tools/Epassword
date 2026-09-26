@@ -22,11 +22,9 @@ English is the default documentation language. The application interface is curr
 
 Windows x64 has been tested locally. Mac Intel and Apple Silicon support and build workflows are implemented, but native Mac validation remains pending. Default Mac builds are development packages, not Apple-notarized distributions.
 
-## Where this wiki lives
+## Publishing
 
-These pages are versioned with the public repository under docs/wiki. The repository's native Wiki feature is enabled but its separate Git repository has not been initialized.
-
-The current published documentation is this source-controlled directory. It remains available independently of native Wiki initialization.
+These pages are maintained in docs/wiki and rendered for the separate GitHub Wiki with scripts/render-wiki.cjs, including installation and API guides. See [publishing instructions](../WIKI-PUBLISHING.md).
 
 - [Chrome extension](Browser-Extension.md): install, pair, fill and save registrations.
 
