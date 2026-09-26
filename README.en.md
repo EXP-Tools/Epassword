@@ -8,17 +8,17 @@ The three-column interface is inspired by 1Password. Epassword is an independent
 
 [Installation](INSTALL.en.md) · [安装指南](INSTALL.md) · [Project Wiki](docs/wiki/Home.md) · [中文 Wiki](docs/wiki/Home-zh-CN.md)
 
-## Download 1.1
+## Download 1.2
 
-Current release: [Epassword 1.1](https://github.com/EXP-Tools/Epassword/releases/tag/v1.1.0). Combined installers include the desktop app and Chrome extension files.
+Current release: [Epassword 1.2](https://github.com/EXP-Tools/Epassword/releases/tag/v1.2.0). Combined installers include the desktop app and Chrome extension files.
 
 | Platform | Download |
 | --- | --- |
-| Windows x64 | [Epassword-Setup-1.1.0-win-x64.zip](https://github.com/EXP-Tools/Epassword/releases/download/v1.1.0/Epassword-Setup-1.1.0-win-x64.zip) |
-| Mac Intel | [Epassword-Setup-1.1.0-mac-x64.zip](https://github.com/EXP-Tools/Epassword/releases/download/v1.1.0/Epassword-Setup-1.1.0-mac-x64.zip) |
-| Mac Apple Silicon | [Epassword-Setup-1.1.0-mac-arm64.zip](https://github.com/EXP-Tools/Epassword/releases/download/v1.1.0/Epassword-Setup-1.1.0-mac-arm64.zip) |
+| Windows x64 | [Epassword-Setup-1.2.0-win-x64.zip](https://github.com/EXP-Tools/Epassword/releases/download/v1.2.0/Epassword-Setup-1.2.0-win-x64.zip) |
+| Mac Intel | [Epassword-Setup-1.2.0-mac-x64.zip](https://github.com/EXP-Tools/Epassword/releases/download/v1.2.0/Epassword-Setup-1.2.0-mac-x64.zip) |
+| Mac Apple Silicon | [Epassword-Setup-1.2.0-mac-arm64.zip](https://github.com/EXP-Tools/Epassword/releases/download/v1.2.0/Epassword-Setup-1.2.0-mac-arm64.zip) |
 
-[Chrome extension](https://github.com/EXP-Tools/Epassword/releases/download/v1.1.0/Epassword-Chrome-1.1.0.zip) · [SHA256SUMS.txt](https://github.com/EXP-Tools/Epassword/releases/download/v1.1.0/SHA256SUMS.txt)
+[Chrome extension](https://github.com/EXP-Tools/Epassword/releases/download/v1.2.0/Epassword-Chrome-1.2.0.zip) · [SHA256SUMS.txt](https://github.com/EXP-Tools/Epassword/releases/download/v1.2.0/SHA256SUMS.txt)
 
 Extract the entire ZIP, then run install.cmd on Windows or bash install.command on Mac. Chrome activation and pairing remain manual. Mac packages are not Apple-notarized.
 
@@ -56,7 +56,7 @@ Windows and Mac use the same workbook format and master password. Copy your work
 
 ## Install desktop and Chrome extension together
 
-Download the matching Epassword-Setup ZIP from [Releases](https://github.com/EXP-Tools/Epassword/releases/tag/v1.1.0), extract it, and run install.cmd (Windows) or bash install.command (Mac). The included runtime installs both components without Node.js. Follow the generated guide to enable the plugin in Chrome and pair it. [Combined installation](INSTALL.en.md#combined-desktop--chrome-installation-recommended).
+Download the matching Epassword-Setup ZIP from [Releases](https://github.com/EXP-Tools/Epassword/releases/tag/v1.2.0), extract it, and run install.cmd (Windows) or bash install.command (Mac). The included runtime installs both components without Node.js. Follow the generated guide to enable the plugin in Chrome and pair it. [Combined installation](INSTALL.en.md#combined-desktop--chrome-installation-recommended).
 
 ## Quick start
 
@@ -219,3 +219,7 @@ Choose **打赏作者** in the desktop sidebar or Chrome extension popup to view
 ## Excel import and export
 
 Version 1.1 supports selected/all-item export to plain Excel or encrypted Excel with a separate password. Preview and import selected Epassword-format items as new entries, including custom fields and OTP. See the [illustrated guide](docs/USER-GUIDE.en.md).
+
+## Encrypted single-item sharing
+
+Share an item as password-encrypted hexadecimal text. Import it with the sharing password, preview and append as a new item, including custom fields and OTP. Offline shares do not expire. See the [user guide](docs/USER-GUIDE.en.md).

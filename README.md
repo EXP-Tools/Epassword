@@ -8,17 +8,17 @@
 
 Epassword 使用独立品牌，不关联 1Password 服务。已添加 Windows x64、macOS Intel（x64）和 Apple Silicon（arm64）支持。Windows 已实测；Mac 构建入口及自动化流程已准备，尚待 Mac 实机验证。Linux 暂不作为支持目标。
 
-## 下载 1.1
+## 下载 1.2
 
-当前版本：[Epassword 1.1](https://github.com/EXP-Tools/Epassword/releases/tag/v1.1.0)。推荐一体安装包，同时安装桌面应用与 Chrome 插件文件。
+当前版本：[Epassword 1.2](https://github.com/EXP-Tools/Epassword/releases/tag/v1.2.0)。推荐一体安装包，同时安装桌面应用与 Chrome 插件文件。
 
 | 平台 | 下载 |
 | --- | --- |
-| Windows x64 | [Epassword-Setup-1.1.0-win-x64.zip](https://github.com/EXP-Tools/Epassword/releases/download/v1.1.0/Epassword-Setup-1.1.0-win-x64.zip) |
-| Mac Intel | [Epassword-Setup-1.1.0-mac-x64.zip](https://github.com/EXP-Tools/Epassword/releases/download/v1.1.0/Epassword-Setup-1.1.0-mac-x64.zip) |
-| Mac Apple Silicon | [Epassword-Setup-1.1.0-mac-arm64.zip](https://github.com/EXP-Tools/Epassword/releases/download/v1.1.0/Epassword-Setup-1.1.0-mac-arm64.zip) |
+| Windows x64 | [Epassword-Setup-1.2.0-win-x64.zip](https://github.com/EXP-Tools/Epassword/releases/download/v1.2.0/Epassword-Setup-1.2.0-win-x64.zip) |
+| Mac Intel | [Epassword-Setup-1.2.0-mac-x64.zip](https://github.com/EXP-Tools/Epassword/releases/download/v1.2.0/Epassword-Setup-1.2.0-mac-x64.zip) |
+| Mac Apple Silicon | [Epassword-Setup-1.2.0-mac-arm64.zip](https://github.com/EXP-Tools/Epassword/releases/download/v1.2.0/Epassword-Setup-1.2.0-mac-arm64.zip) |
 
-[Chrome 插件](https://github.com/EXP-Tools/Epassword/releases/download/v1.1.0/Epassword-Chrome-1.1.0.zip) · [SHA256SUMS.txt](https://github.com/EXP-Tools/Epassword/releases/download/v1.1.0/SHA256SUMS.txt)
+[Chrome 插件](https://github.com/EXP-Tools/Epassword/releases/download/v1.2.0/Epassword-Chrome-1.2.0.zip) · [SHA256SUMS.txt](https://github.com/EXP-Tools/Epassword/releases/download/v1.2.0/SHA256SUMS.txt)
 
 完整解压后，Windows 运行 install.cmd，Mac 运行 bash install.command。Chrome 仍需在扩展管理页手动启用并配对。Mac 包未经 Apple 公证。
 
@@ -203,7 +203,7 @@ Chrome 开发者模式加载 extension 文件夹，再在桌面端设置中生�
 
 ## 桌面与插件一体安装
 
-从 [Release 1.1](https://github.com/EXP-Tools/Epassword/releases/tag/v1.1.0) 下载对应平台的 Epassword-Setup ZIP，完整解压后运行 install.cmd（Windows）或 bash install.command（Mac）。安装包自带运行时，无需 Node.js，同时安装桌面程序与插件文件，再按指引在 Chrome 中启用并配对。[安装说明](INSTALL.md)。
+从 [Release 1.2](https://github.com/EXP-Tools/Epassword/releases/tag/v1.2.0) 下载对应平台的 Epassword-Setup ZIP，完整解压后运行 install.cmd（Windows）或 bash install.command（Mac）。安装包自带运行时，无需 Node.js，同时安装桌面程序与插件文件，再按指引在 Chrome 中启用并配对。[安装说明](INSTALL.md)。
 
 ## AI 与程序 API
 
@@ -220,3 +220,7 @@ Chrome 开发者模式加载 extension 文件夹，再在桌面端设置中生�
 ## 导入与导出 Excel
 
 1.1 支持多选/全选项目导出，选择普通 Excel 或使用独立主密码加密。导入支持预览并选择 Epassword 格式项目，追加为新项目，保留自定义字段及 OTP。[图文操作说明](docs/USER-GUIDE.md)。
+
+## 单项目加密分享
+
+点击项目的「分享」，设置独立分享密码，将完整项目 JSON 加密为可复制的十六进制密文。接收方在「导入 → 导入分享密文」输入密码，预览后恢复为新项目。支持自定义字段和 OTP；离线分享不自动过期。[使用手册](docs/USER-GUIDE.md)。

@@ -49,6 +49,9 @@ jobs:
       - name: Test Chinese search input
         if: matrix.platform == 'win'
         run: npm run test:search
+      - name: Test encrypted item sharing
+        if: matrix.platform == 'win'
+        run: npm run test:share
       - name: Package local app
         run: npm run pack
       - name: Smoke test packaged app

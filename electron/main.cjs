@@ -36,7 +36,7 @@ const browserBridge=new BrowserBridge({
  },generation),
  changed:()=>{if(win&&!win.isDestroyed())win.webContents.send('vault-changed');}
 });
-const transfer=require('./transfer.cjs').transferHandlers({vault,dialog,getWindow:()=>win,requireUnlocked,touch,mutate});
+const transfer=require('./transfer.cjs').transferHandlers({vault,dialog,getWindow:()=>win,requireUnlocked,touch,mutate,putClipboard});
 function clearClip(){clearTimeout(clipTimer);if(copied&&clipboard.readText()===copied)clipboard.clear();copied=null;}
 function lock(){transfer.clear();clearTimeout(idle);programApi.revokeAll();vault.lock();clearClip();if(win&&!win.isDestroyed())win.webContents.send('locked');}
 function touch(){clearTimeout(idle);if(vault.items)idle=setTimeout(lock,5*60*1000);}

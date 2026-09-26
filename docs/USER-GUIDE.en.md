@@ -2,11 +2,11 @@
 
 [简体中文](USER-GUIDE.md) | **English** · [README](../README.en.md) · [Installation](../INSTALL.en.md)
 
-For Epassword 1.1. These are real Electron screenshots captured on Windows with fictional accounts and OTP configuration. The UI is currently Chinese. On Mac, use Command instead of Ctrl. Click an image to enlarge it.
+For Epassword 1.2. These are real Electron screenshots captured on Windows with fictional accounts and OTP configuration. The UI is currently Chinese. On Mac, use Command instead of Ctrl. Click an image to enlarge it.
 
 ## 1. Install and open
 
-Download the matching Epassword-Setup ZIP from [Release 1.1](https://github.com/EXP-Tools/Epassword/releases/tag/v1.1.0). Extract everything, then run install.cmd on Windows or bash install.command on Mac. Choose x64 for Intel Macs and arm64 for Apple Silicon. Mac packages are not notarized. See [installation instructions](../INSTALL.en.md) for requirements.
+Download the matching Epassword-Setup ZIP from [Release 1.2](https://github.com/EXP-Tools/Epassword/releases/tag/v1.2.0). Extract everything, then run install.cmd on Windows or bash install.command on Mac. Choose x64 for Intel Macs and arm64 for Apple Silicon. Mac packages are not notarized. See [installation instructions](../INSTALL.en.md) for requirements.
 
 The combined installer includes desktop, Chrome extension files and the API client. Chrome still requires manual activation and pairing.
 
@@ -113,6 +113,18 @@ Unlock the destination vault, choose 导入 Excel, enter the source password if 
 Only Epassword's worksheet/column format is supported, not arbitrary Excel/CSV. Source files are limited to 20 MB; the destination allows 10000 items total. Preview expires after five minutes or locking.
 
 Import appends new IDs without overwriting accounts, preserving custom fields, OTP and archive/trash state. Repeated imports create copies. Imported items are encrypted under the destination vault's existing master password.
+
+## Share one item (new in 1.2)
+
+![Encrypted single-item sharing](screenshots/share.png)
+
+Select an item and click 分享 (Share). Set and confirm an independent 12–255 character sharing password, click 生成分享密文, then 复制密文. Send the hexadecimal string and communicate the password separately; never send the vault master password.
+
+The recipient unlocks their own vault and chooses 导入 → 导入分享密文, pastes the ciphertext and enters the sharing password, then chooses 解密并预览 and 导入此项目. A new item is appended without overwriting existing accounts. Repeated imports create copies.
+
+The payload includes passwords, notes, custom fields and OTP setup secrets, preserving favorite/archive/trash state. Wrong passwords or tampered ciphertext are rejected. “Temporary” means a password dedicated to this share: **offline ciphertext has no automatic expiry or remote revocation**. Later password changes do not invalidate an existing share.
+
+JSON is encrypted with AES-256-GCM and a scrypt-derived key, with a random salt and nonce for every share. See the [format specification](SHARING.md). The copied ciphertext clears after about 30 seconds if it is still the clipboard value.
 
 ## 8. Backup and Excel recovery
 

@@ -11,7 +11,7 @@ on:
       tag:
         description: Existing draft release tag
         required: true
-        default: v1.1.0
+        default: v1.2.0
 permissions:
   actions: read
   contents: write

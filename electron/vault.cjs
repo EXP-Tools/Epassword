@@ -75,4 +75,4 @@ class Vault {
   try {await fs.writeFile(temp,data,{flag:'wx',mode:0o600});await fs.copyFile(file,file+'.bak');if(generation!==this.generation)throw Error('密码库已锁定');await fs.rename(temp,file);if(generation===this.generation)Object.assign(this,{items,password,digest:hash(data)});}finally{await fs.rm(temp,{force:true});}
  });this.queue=job.catch(()=>{});return job;}
 }
-module.exports={Vault,encode,decode,columns};
+module.exports={Vault,encode,decode,columns,validate};

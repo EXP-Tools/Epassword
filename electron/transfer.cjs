@@ -1,11 +1,27 @@
 const fs=require('node:fs/promises');
 const {randomUUID}=require('node:crypto');
 const {encode,decode}=require('./vault.cjs');
-function transferHandlers({vault,dialog,getWindow,requireUnlocked,touch,mutate}){
- let pending=null;
- const clear=()=>{pending=null;};
+const {encryptItem,decryptItem}=require('./share.cjs');
+function transferHandlers({vault,dialog,getWindow,requireUnlocked,touch,mutate,putClipboard}){
+ let pending=null,shared=null;
+ const clear=()=>{pending=null;shared=null;};
  const check=generation=>{requireUnlocked();if(generation!==vault.generation)throw Error('密码库已锁定或切换，请重新操作');};
  return {clear,channels:{
+  'share-create':async(_,options)=>{
+   requireUnlocked();touch();shared=null;const generation=vault.generation;
+   const item=vault.items.find(i=>i.id===options?.id);if(!item)throw Error('项目不存在');
+   const hex=await encryptItem(item,options.password);check(generation);shared=hex;return hex;
+  },
+  'share-copy':()=>{requireUnlocked();if(!shared)throw Error('请先生成分享密文');putClipboard(shared);},
+  'share-clear':()=>{shared=null;},
+  'share-preview':async(_,options)=>{
+   requireUnlocked();touch();pending=null;const generation=vault.generation;
+   const item=await decryptItem(options?.hex,options?.password);check(generation);
+   const token=randomUUID();pending={token,generation,items:[item],expires:Date.now()+5*60*1000};
+   const {id,title,username,category,archived,deleted}=item;
+   return {token,items:[{id,title,username,category,archived,deleted}]};
+  },
+
   'transfer-export':async(_,options)=>{
    requireUnlocked();touch();const generation=vault.generation;
    if(!options||!Array.isArray(options.ids)||!options.ids.length||typeof options.encrypted!=='boolean')throw Error('请选择要导出的项目');

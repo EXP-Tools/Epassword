@@ -2,11 +2,11 @@
 
 **简体中文** | [English](USER-GUIDE.en.md) · [返回 README](../README.md) · [安装指南](../INSTALL.md)
 
-适用于 Epassword 1.1。界面截图来自 Windows 上运行的真实 Electron 应用，账号、邮箱、密码和 OTP 配置均为虚构示例。Mac 的主要操作相同，快捷键使用 Command 替代 Ctrl。点击图片可查看大图。
+适用于 Epassword 1.2。界面截图来自 Windows 上运行的真实 Electron 应用，账号、邮箱、密码和 OTP 配置均为虚构示例。Mac 的主要操作相同，快捷键使用 Command 替代 Ctrl。点击图片可查看大图。
 
 ## 1. 安装并启动
 
-从 [Release 1.1](https://github.com/EXP-Tools/Epassword/releases/tag/v1.1.0) 下载与你的系统对应的 **Epassword-Setup** ZIP，完整解压。Windows 运行 **install.cmd**，Mac 运行 **bash install.command**。安装器同时复制桌面应用、插件文件及 API 客户端；Chrome 插件仍需手动启用，见第 6 节。
+从 [Release 1.2](https://github.com/EXP-Tools/Epassword/releases/tag/v1.2.0) 下载与你的系统对应的 **Epassword-Setup** ZIP，完整解压。Windows 运行 **install.cmd**，Mac 运行 **bash install.command**。安装器同时复制桌面应用、插件文件及 API 客户端；Chrome 插件仍需手动启用，见第 6 节。
 
 Mac Intel 选 x64，Apple Silicon 选 arm64。Mac 包未经过 Apple 公证；详细要求和安装排错见[安装指南](../INSTALL.md)。
 
@@ -127,6 +127,21 @@ AI 接入由本地工具完成，并非在应用中直接聊天。请求示例�
 仅支持 Epassword 的工作表及字段结构，不能直接导入任意 Excel/CSV 表格。文件上限 20 MB，目标密码库合计最多 10000 项。预览五分钟后失效，锁定后需重新预览。
 
 导入保留自定义字段、OTP 和归档/回收站状态，以新 ID 追加项目，不覆盖已有账号；重复导入会产生副本。导入后的数据仍使用目标密码库原来的主密码加密。
+
+## 分享单个项目（1.2 新增）
+
+![加密分享单个项目](screenshots/share.png)
+
+1. 在项目详情右上角点击「分享」。
+2. 设置并确认独立的临时分享密码（12–255 个字符）。
+3. 点击「生成分享密文」，再点击「复制密文」，把十六进制字符串发送给接收方。
+4. 将分享密码通过单独渠道告知对方，不需要提供密码库主密码。
+
+接收方解锁自己的密码库，点击侧栏「导入 → 导入分享密文」，粘贴密文并输入分享密码，点击「解密并预览」，确认标题与账号后点击「导入此项目」。恢复为新项目，不覆盖原有账号，重复导入会产生副本。
+
+分享包含项目的密码、备注、自定义字段和 OTP 设置密钥，保留收藏、归档和回收站状态。修改密文或使用错误密码不能解密。临时密码只表示本次分享独立使用，**离线密文不会自动过期，不能远程撤销**；以后改变分享密码或密码库主密码也不会令已有密文失效。
+
+密文以 JSON 为内部内容，使用 scrypt 派生密钥和 AES-256-GCM 认证加密；每次生成使用随机盐与随机 nonce。格式说明见 [分享格式](SHARING.md)。复制的密文会在约 30 秒后清除（若剪贴板仍是该值）。
 
 ## 8. 备份、换电脑与 Excel 恢复
 
