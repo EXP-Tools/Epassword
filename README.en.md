@@ -212,10 +212,6 @@ The renderer has Node integration disabled, context isolation and sandbox enable
 
 The desktop app remembers the last successfully opened or created vault path on this device. On restart, enter the master password to unlock it; the password is not saved. Click the file selector to choose another file if it has moved.
 
-## Support the author
-
-Choose **打赏作者** in the desktop sidebar or Chrome extension popup to view Alipay and WeChat donation codes. Images are bundled for offline use; donations are optional.
-
 ## Excel import and export
 
 Version 1.1 supports selected/all-item export to plain Excel or encrypted Excel with a separate password. Preview and import selected Epassword-format items as new entries, including custom fields and OTP. See the [illustrated guide](docs/USER-GUIDE.en.md).
@@ -223,3 +219,12 @@ Version 1.1 supports selected/all-item export to plain Excel or encrypted Excel 
 ## Encrypted single-item sharing
 
 Share an item as password-encrypted hexadecimal text. Import it with the sharing password, preview and append as a new item, including custom fields and OTP. Offline shares do not expire. See the [user guide](docs/USER-GUIDE.en.md).
+
+## Support the author
+
+If Epassword helps you, you can optionally support its development. Thank you! The desktop app and Chrome extension also include a support menu.
+
+| Alipay | WeChat |
+| :---: | :---: |
+| <img src="extension/assets/sponsor-alipay.png" width="220" height="220" alt="Alipay donation QR code"> | <img src="extension/assets/sponsor-wechat.png" width="220" height="220" alt="WeChat donation code"> |
+| Scan with Alipay | Scan with WeChat |
