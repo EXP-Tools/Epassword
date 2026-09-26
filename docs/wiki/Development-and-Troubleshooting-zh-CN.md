@@ -23,7 +23,7 @@ npm run test:platform
 npm run pack
 ~~~
 
-GUI、屏幕扫码、Excel 测试的前置条件见[安装文档](../../INSTALL.zh-CN.md)。只使用虚构数据，不操作真实密码库。
+GUI、屏幕扫码、Excel 测试的前置条件见[安装文档](../../INSTALL.md)。只使用虚构数据，不操作真实密码库。
 
 在目标系统构建。Mac 跨架构打包会下载目标运行时。Windows 已在本地测试，Mac 实机验证和 Apple 公证仍待完成。
 
@@ -46,6 +46,6 @@ GUI、屏幕扫码、Excel 测试的前置条件见[安装文档](../../INSTALL.
 
 ## 维护文档
 
-README.md 和 INSTALL.md 默认英文，中文版本使用 .zh-CN.md 后缀。Wiki 中英文页面互相链接，功能和限制要保持一致。
+README.md 和 INSTALL.md 默认中文，英文版本使用 .en.md 后缀，.zh-CN.md 文件保留为兼容副本。Wiki 中英文页面互相链接，功能和限制要保持一致。
 
 不要提交密码库、测试截图、node_modules、签名证书或凭据。保留锁文件，核对文档引用的脚本。

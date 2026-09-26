@@ -4,7 +4,7 @@
 
 ## 安装
 
-[INSTALL.zh-CN.md](../../INSTALL.zh-CN.md) 分别说明人类用户与 AI 的安装流程。源码启动：
+[INSTALL.md](../../INSTALL.md) 分别说明人类用户与 AI 的安装流程。源码启动：
 
 ~~~sh
 git clone https://github.com/EXP-Tools/Epassword.git

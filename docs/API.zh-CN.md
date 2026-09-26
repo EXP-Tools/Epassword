@@ -226,4 +226,4 @@ with urllib.request.urlopen(request, timeout=5) as response:
 
 npm test 覆盖授权、网站/权限边界、过期、撤销、请求处理中撤销及限流。npm run test:api 使用真实桌面授权界面和隔离 Chromium 页面，包含请求期间跳转网页的拒绝测试。测试仅使用模拟数据。
 
-[README](https://github.com/EXP-Tools/Epassword/blob/master/README.zh-CN.md)
+[README](https://github.com/EXP-Tools/Epassword/blob/master/README.md)

@@ -5,7 +5,7 @@
 Manifest V3 插件连接本机运行的 Epassword 桌面端，适用于 Windows 和 macOS。密码仍保存在加密 Excel 密码库中，不需要安装 Excel、云服务或 Native Messaging 宿主。
 
 
-推荐使用 Epassword-Setup 一体安装包：Windows 运行 install.cmd，Mac 运行 bash install.command，同时安装桌面与插件，再按 setup.html 启用 Chrome 插件并配对。[安装说明](../../INSTALL.zh-CN.md)。
+推荐使用 Epassword-Setup 一体安装包：Windows 运行 install.cmd，Mac 运行 bash install.command，同时安装桌面与插件，再按 setup.html 启用 Chrome 插件并配对。[安装说明](../../INSTALL.md)。
 
 
 ## 安装与配对

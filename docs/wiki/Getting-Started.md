@@ -4,7 +4,7 @@
 
 ## Install
 
-Follow [INSTALL.md](../../INSTALL.md) for human-user and AI-agent instructions. Source installation:
+Follow [INSTALL.en.md](../../INSTALL.en.md) for human-user and AI-agent instructions. Source installation:
 
 ~~~sh
 git clone https://github.com/EXP-Tools/Epassword.git

@@ -1,10 +1,10 @@
 # Epassword 安装指南
 
-[English](INSTALL.md) | **简体中文**
+[English](INSTALL.en.md) | **简体中文**
 
 [项目 Wiki](docs/wiki/Home-zh-CN.md)
 
-本文分别提供人类用户与 AI 的操作流程。功能与恢复说明见 [README.zh-CN.md](README.zh-CN.md)。命令默认在项目根目录执行。npm / node 命令两平台通用；PowerShell 示例用于 Windows，bash 示例用于 Mac。
+本文分别提供人类用户与 AI 的操作流程。功能与恢复说明见 [README.md](README.md)。命令默认在项目根目录执行。npm / node 命令两平台通用；PowerShell 示例用于 Windows，bash 示例用于 Mac。
 
 ## 桌面应用 + Chrome 插件一体安装（推荐）
 
@@ -186,7 +186,7 @@ npm run dist:mac:signed -- --arch=x64
 
 ```powershell
 Get-Location
-Get-Item package.json, package-lock.json, README.md, INSTALL.md
+Get-Item package.json, package-lock.json, README.en.md, INSTALL.en.md
 Get-Content package.json
 node --version
 npm --version

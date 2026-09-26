@@ -1,8 +1,8 @@
 # Epassword
 
-[English](README.md) | **简体中文**
+[English](README.en.md) | **简体中文**
 
-[项目 Wiki](docs/wiki/Home-zh-CN.md) · [安装指南](INSTALL.zh-CN.md)
+[项目 Wiki](docs/wiki/Home-zh-CN.md) · [安装指南](INSTALL.md)
 
 基于 Electron 的本地密码管理器，采用类似 1Password 的三栏布局，用加密 Excel 文件保存密码和 OTP 密钥。**主密码就是 Excel 的文件打开密码**：即使没有 Epassword，也可以使用 Microsoft Excel 读取信息。
 
@@ -25,7 +25,7 @@ Epassword 使用独立品牌，不关联 1Password 服务。已添加 Windows x6
 
 ## 开始使用
 
-完整安装流程见 **[INSTALL.zh-CN.md](INSTALL.zh-CN.md)**，分别提供人类用户和 AI 的安装、验证、打包与排错步骤。
+完整安装流程见 **[INSTALL.md](INSTALL.md)**，分别提供人类用户和 AI 的安装、验证、打包与排错步骤。
 
 - 已有 Windows 文件夹版：运行 `release/win-unpacked/Epassword.exe`，请保留整个文件夹。
 - 已有 Mac 构建：选择对应芯片架构的 DMG，打开后将 Epassword 拖到“应用程序”。当前工作区没有已构建的 Mac 安装包。
@@ -139,13 +139,13 @@ npm start
 | `npm run dist:mac:x64` | 在 Mac 上构建 Intel DMG / ZIP |
 | `npm run dist` | 构建当前系统和当前架构的分发包 |
 
-桌面测试会打开窗口并操作测试剪贴板；Excel 测试依赖桌面测试先生成的文件。具体顺序和前置条件见 [INSTALL.zh-CN.md](INSTALL.zh-CN.md)。
+桌面测试会打开窗口并操作测试剪贴板；Excel 测试依赖桌面测试先生成的文件。具体顺序和前置条件见 [INSTALL.md](INSTALL.md)。
 
 已有验证记录：Windows 打包程序交互测试通过；TOTP 通过 RFC 6238 的 18 个标准测试向量；本机 Microsoft Excel 可直接读出密码、中文内容及 OTP 恢复链接。这些记录不等同于所有平台兼容性或独立安全审计。
 
 Windows 和 Mac 使用同一 Excel 数据格式、同一主密码；手动复制密码库即可在另一台设备打开，没有自动同步。不要在两台设备同时修改同一文件。
 
-已提供 [GitHub Actions 构建流程](.github/workflows/build.yml)，分别使用 Windows、Mac Intel、Mac ARM runner 执行测试和打包，仅上传工作流产物，不自动发布 Release。Mac 默认产物为本地 ad-hoc 签名测试包；公开分发所需的 Developer ID 签名与 Apple 公证见 [INSTALL.zh-CN.md](INSTALL.zh-CN.md)。构建状态请以仓库 Actions 记录为准。
+已提供 [GitHub Actions 构建流程](.github/workflows/build.yml)，分别使用 Windows、Mac Intel、Mac ARM runner 执行测试和打包，仅上传工作流产物，不自动发布 Release。Mac 默认产物为本地 ad-hoc 签名测试包；公开分发所需的 Developer ID 签名与 Apple 公证见 [INSTALL.md](INSTALL.md)。构建状态请以仓库 Actions 记录为准。
 
 ## 项目结构
 
@@ -184,7 +184,7 @@ Chrome 开发者模式加载 extension 文件夹，再在桌面端设置中生�
 
 ## 桌面与插件一体安装
 
-从 [Release 1.0](https://github.com/EXP-Tools/Epassword/releases/tag/v1.0.0) 下载对应平台的 Epassword-Setup ZIP，完整解压后运行 install.cmd（Windows）或 bash install.command（Mac）。安装包自带运行时，无需 Node.js，同时安装桌面程序与插件文件，再按指引在 Chrome 中启用并配对。[安装说明](INSTALL.zh-CN.md)。
+从 [Release 1.0](https://github.com/EXP-Tools/Epassword/releases/tag/v1.0.0) 下载对应平台的 Epassword-Setup ZIP，完整解压后运行 install.cmd（Windows）或 bash install.command（Mac）。安装包自带运行时，无需 Node.js，同时安装桌面程序与插件文件，再按指引在 Chrome 中启用并配对。[安装说明](INSTALL.md)。
 
 ## AI 与程序 API
 

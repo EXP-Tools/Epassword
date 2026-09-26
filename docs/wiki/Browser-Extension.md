@@ -5,7 +5,7 @@
 The Manifest V3 extension connects Chrome to the running Epassword desktop application on Windows or macOS. Passwords continue to live in the encrypted Excel vault. The extension does not need Excel installed, a cloud service or a native messaging host.
 
 
-Recommended: use the combined Epassword-Setup ZIP. Run install.cmd on Windows or bash install.command on Mac to install the desktop and extension together, then follow setup.html for Chrome activation and pairing. [Installation guide](../../INSTALL.md).
+Recommended: use the combined Epassword-Setup ZIP. Run install.cmd on Windows or bash install.command on Mac to install the desktop and extension together, then follow setup.html for Chrome activation and pairing. [Installation guide](../../INSTALL.en.md).
 
 
 ## Install and pair

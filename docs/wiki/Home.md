@@ -13,10 +13,10 @@ Epassword is a local Electron password manager whose vault is a password-encrypt
 
 ## Documentation languages
 
-- [README — English](../../README.md) / [README — 中文](../../README.zh-CN.md)
-- [Installation — English](../../INSTALL.md) / [安装指南 — 中文](../../INSTALL.zh-CN.md)
+- [README — English](../../README.en.md) / [README — 中文](../../README.md)
+- [Installation — English](../../INSTALL.en.md) / [安装指南 — 中文](../../INSTALL.md)
 
-English is the default documentation language. The application interface is currently Chinese.
+Chinese is the default README and installation-guide language. The application interface is currently Chinese.
 
 ## Platform status
 

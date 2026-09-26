@@ -10,7 +10,7 @@ const repo = 'https://github.com/EXP-Tools/Epassword/blob/master/';
 const pages = new Map();
 for (const f of fs.readdirSync(path.join(root,'docs/wiki')).filter(f=>f.endsWith('.md')))
   pages.set('docs/wiki/'+f,f.slice(0,-3));
-for (const [source,name] of [['docs/API.md','API'],['docs/API.zh-CN.md','API-zh-CN'],['INSTALL.md','Installation'],['INSTALL.zh-CN.md','Installation-zh-CN']])
+for (const [source,name] of [['docs/API.md','API'],['docs/API.zh-CN.md','API-zh-CN'],['INSTALL.en.md','Installation'],['INSTALL.md','Installation-zh-CN']])
   pages.set(source,name);
 for (const [source,name] of pages) {
   const input=fs.readFileSync(path.join(root,source),'utf8');

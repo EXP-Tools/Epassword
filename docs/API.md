@@ -228,4 +228,4 @@ For an AI tool, expose a narrow operation such as fill_login(url, item_id) that 
 
 npm test covers authorization, scope/domain boundaries, expiry, revocation, in-flight request invalidation and rate limits. npm run test:api tests the real desktop authorization UI and an isolated Chromium/Playwright page, including navigation during a credential request. Fixtures contain no real vault data.
 
-[README](https://github.com/EXP-Tools/Epassword/blob/master/README.md)
+[README](https://github.com/EXP-Tools/Epassword/blob/master/README.en.md)

@@ -23,7 +23,7 @@ npm run test:platform
 npm run pack
 ~~~
 
-See [the installation guide](../../INSTALL.md) for GUI, OTP-screen and native Excel test prerequisites. Tests must use synthetic data, not real vaults.
+See [the installation guide](../../INSTALL.en.md) for GUI, OTP-screen and native Excel test prerequisites. Tests must use synthetic data, not real vaults.
 
 Build on the matching OS. Mac cross-architecture builds download the target runtime. Windows is locally tested; native Mac verification and Apple notarization remain pending.
 
@@ -46,6 +46,6 @@ Default CI uploads build artifacts, not public releases. Default Mac builds are 
 
 ## Contributing documentation
 
-English defaults are README.md and INSTALL.md. Chinese versions use the .zh-CN.md suffix. Wiki language pairs link to each other. Keep behavior and limitations consistent across languages.
+README.md and INSTALL.md default to Chinese. English versions use the .en.md suffix; .zh-CN.md files remain compatibility copies. Wiki language pairs link to each other. Keep behavior and limitations consistent across languages.
 
 Do not commit vaults, test screenshots, node_modules, signing certificates or credentials. Preserve the package lockfile and verify scripts referenced in documentation.

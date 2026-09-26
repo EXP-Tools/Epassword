@@ -13,10 +13,10 @@ Epassword 是使用加密 Excel 文件保存凭据的本地 Electron 密码管�
 
 ## 中英文文档
 
-- [README — English](../../README.md) / [README — 中文](../../README.zh-CN.md)
-- [Installation — English](../../INSTALL.md) / [安装指南 — 中文](../../INSTALL.zh-CN.md)
+- [README — English](../../README.en.md) / [README — 中文](../../README.md)
+- [Installation — English](../../INSTALL.en.md) / [安装指南 — 中文](../../INSTALL.md)
 
-默认文档语言为英文；应用界面目前为中文。
+README 与安装指南默认使用中文，同时提供英文版本；应用界面目前为中文。
 
 ## 平台状态
 
