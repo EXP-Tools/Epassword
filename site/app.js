@@ -51,3 +51,29 @@ $('encrypted').onchange=()=>{$('export-warning').hidden=$('encrypted').checked;$
 $('export-preview').onclick=()=>{const n=$('export-items').querySelectorAll('input:checked').length;$('export-result').textContent='演示预览：'+n+' 个项目 → '+($('encrypted').checked?'独立主密码加密的 Excel':'普通 Excel')+'。请在桌面应用中完成实际导出。';$('export-result').hidden=false;};
 $('share-demo').onclick=()=>{$('share-result').hidden=!$('share-result').hidden;$('share-demo').textContent=$('share-result').hidden?'体验接收方流程 →':'收起接收方流程 ↑';};
 switchMode('vault');renderItems();generate();updateSelection();
+
+let registrationDemo=false;
+function resetBrowserDemo(register){
+ registrationDemo=register;
+ $('browser-login').classList.toggle('selected',!register);$('browser-register').classList.toggle('selected',register);
+ $('browser-form-title').textContent=register?'创建演示账号':'登录演示网站';
+ $('browser-username').value=register?'new.alex@example.com':'';
+ $('browser-password').value=register?'Demo-New-Account-2026!':'';
+ $('browser-action').textContent=register?'模拟注册提交 →':'模拟访问登录页 →';
+ $('browser-result').hidden=true;$('browser-confirm').hidden=true;$('browser-confirm').disabled=false;
+}
+$('browser-login').onclick=()=>resetBrowserDemo(false);$('browser-register').onclick=()=>resetBrowserDemo(true);
+$('browser-action').onclick=()=>{
+ $('browser-result').hidden=false;
+ if(registrationDemo){$('browser-result').textContent='检测到注册信息 → 插件提示「保存到 Epassword」。请先确认网站注册成功，再在桌面端确认。';$('browser-confirm').hidden=false;}
+ else{$('browser-username').value='alex@example.com';$('browser-password').value='Demo-Design-2026!';$('browser-result').textContent='✓ 精确匹配域名，已自动填写演示账号。登录表单未提交。';}
+};
+$('browser-confirm').onclick=()=>{$('browser-result').textContent='✓ 演示：经桌面端确认，追加为新的登录项目；保留已有账号。';$('browser-confirm').disabled=true;};
+const apiSamples={
+  "sdk": "// 业务密码保存在 Epassword，不写入源码\n// accessToken 由受信任的本机授权流程提供\nconst client = new EpasswordClient({ token: accessToken });\nconst url = 'https://design.example.com/login';\nconst { items } = await client.search(url);\n// 由用户明确选择一个账号\nconst chosen = items.find(i => i.id === selectedItemId);\nif (!chosen) throw new Error('请选择匹配的账号');\nconst credential = await client.credentials(url, chosen.id);\n// 在内存中用于登录，不写入文件或日志\nawait localLogin(credential.username, credential.password);",
+  "http": "POST http://127.0.0.1:29744/v1/logins/credentials\nAuthorization: Bearer <本机程序的授权 Token>\nContent-Type: application/json\n\n{\n  \"url\": \"https://design.example.com/login\",\n  \"itemId\": \"demo-01\"\n}",
+  "env": "业务密码：\n  在 Epassword UI 中保存和更新\n  程序运行时通过 API 读取，不必逐项设置环境变量\n\nAPI Token（访问密码库的授权凭据）：\n  在桌面端按程序、网站、有效期授权\n  仍须安全提供给本机程序，不应提交代码仓库\n  SDK 可直接接收 Token；环境变量也是可选方式\n\n密码库锁定或 Token 过期后，需要重新授权。"
+};
+function selectApi(method){$('api-code').textContent=apiSamples[method];document.querySelectorAll('[data-api]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.api===method)));$('api-result').hidden=true;}
+document.querySelectorAll('[data-api]').forEach(b=>b.onclick=()=>selectApi(b.dataset.api));
+$('api-run').onclick=()=>{$('api-result').hidden=false;};selectApi('sdk');
