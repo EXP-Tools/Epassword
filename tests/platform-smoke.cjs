@@ -12,8 +12,20 @@ const path=require('node:path');const fs=require('node:fs/promises');const asser
   await page.keyboard.press(process.platform==='darwin'?'Meta+k':'Control+k');await expect(page.locator('#search')).toBeFocused();
   await page.keyboard.press(process.platform==='darwin'?'Meta+l':'Control+l');await page.waitForSelector('#master');
   if(process.platform==='darwin'){
-   await app.evaluate(({BrowserWindow})=>BrowserWindow.getAllWindows()[0].close());
-   const reopened=app.waitForEvent('window');await app.evaluate(({app})=>app.emit('activate'));page=await reopened;
+   // Subscribe before closing and reactivate in the main process after all closed handlers.
+   // Keeping this in one evaluation also avoids a second command during target teardown.
+   const [reopened,closedCount]=await Promise.all([
+    app.waitForEvent('window',{timeout:15000}),
+    app.evaluate(({app,BrowserWindow})=>new Promise(resolve=>{
+     const window=BrowserWindow.getAllWindows()[0];
+     window.once('closed',()=>setImmediate(()=>{
+      const count=BrowserWindow.getAllWindows().length;
+      app.emit('activate');resolve(count);
+     }));
+     window.close();
+    }))
+   ]);
+   assert.equal(closedCount,0);page=reopened;
    await page.waitForSelector('#master');
    // A reopened window must have working IPC, without duplicate registrations.
    const generated=await page.evaluate(()=>window.epassword.call('generate',{type:'pin',length:6}));assert.match(generated,/^\d{6}$/);
