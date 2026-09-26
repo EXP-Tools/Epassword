@@ -1,0 +1,13 @@
+node_modules/
+release/
+test-results/
+*.xlsx
+*.bak
+*.tmp
+.wiki-publish/
+.env
+.env.*
+*.pem
+*.p12
+*.pfx
+.DS_Store

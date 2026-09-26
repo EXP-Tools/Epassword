@@ -1,0 +1,2 @@
+const {contextBridge,ipcRenderer}=require('electron');
+contextBridge.exposeInMainWorld('epassword',{platform:process.platform,call:async(name,...args)=>{if(!['choose','unlock','save','lock','activity','generate','copy','change-password','reveal','website','otp-parse','otp-codes','otp-copy','otp-scan','screen-settings'].includes(name))throw Error('非法操作');const r=await ipcRenderer.invoke(name,...args);if(!r.ok)throw Error(r.error);return r.value;},onLock:callback=>ipcRenderer.on('locked',()=>callback())});

@@ -1,0 +1,60 @@
+name: Desktop builds
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main, master]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runner: windows-latest
+            platform: win
+            arch: x64
+          - runner: macos-15-intel
+            platform: mac
+            arch: x64
+          - runner: macos-15
+            platform: mac
+            arch: arm64
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - name: Package local app
+        run: npm run pack
+      - name: Smoke test packaged app
+        shell: bash
+        run: |
+          if [ "${{ matrix.platform }}" = "win" ]; then
+            export EPASSWORD_TEST_RUNTIME="$PWD/release/win-unpacked/Epassword.exe"
+          elif [ "${{ matrix.arch }}" = "arm64" ]; then
+            export EPASSWORD_TEST_RUNTIME="$PWD/release/mac-arm64/Epassword.app/Contents/MacOS/Epassword"
+          else
+            export EPASSWORD_TEST_RUNTIME="$PWD/release/mac/Epassword.app/Contents/MacOS/Epassword"
+          fi
+          node tests/platform-smoke.cjs
+      - name: Build distribution packages
+        run: node scripts/pack.cjs --dist --platform=${{ matrix.platform }} --arch=${{ matrix.arch }}
+      - name: Upload build artifacts (not a public release)
+        uses: actions/upload-artifact@v4
+        with:
+          name: Epassword-${{ matrix.platform }}-${{ matrix.arch }}
+          path: |
+            release/*.exe
+            release/*.dmg
+            release/*.zip
+          if-no-files-found: error
