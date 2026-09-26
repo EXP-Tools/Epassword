@@ -46,6 +46,9 @@ jobs:
       - name: Test Excel import and export
         if: matrix.platform == 'win'
         run: npm run test:transfer
+      - name: Test Chinese search input
+        if: matrix.platform == 'win'
+        run: npm run test:search
       - name: Package local app
         run: npm run pack
       - name: Smoke test packaged app
