@@ -29,20 +29,7 @@ Extract the entire ZIP, then run install.cmd on Windows or bash install.command 
 
 [Illustrated user guide](docs/USER-GUIDE.en.md) · [中文用户手册](docs/USER-GUIDE.md)
 
-Real application screenshots with fictional demo data. The guide includes step-by-step instructions, more screenshots and troubleshooting.
-
-### Account management
-
-![Epassword vault](docs/screenshots/vault.png)
-
-### Password generation
-
-![Item editor and password generator](docs/screenshots/editor.png)
-
-### OTP and screen scanning
-
-![OTP setup and scanning controls](docs/screenshots/otp-setup.png)
-
+[![Epassword — click to explore the interactive demo](docs/screenshots/vault.png)](https://exp-tools.github.io/Epassword/)
 
 ## Platform status
 

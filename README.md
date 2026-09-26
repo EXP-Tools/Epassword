@@ -29,20 +29,7 @@ Epassword 使用独立品牌，不关联 1Password 服务。已添加 Windows x6
 
 [图文用户使用手册](docs/USER-GUIDE.md) · [English user guide](docs/USER-GUIDE.en.md)
 
-以下为真实应用界面，使用虚构演示数据。完整操作步骤、更多截图及常见问题见用户手册。
-
-### 账号管理
-
-![Epassword 密码库主页](docs/screenshots/vault.png)
-
-### 密码生成
-
-![新建项目与密码生成器](docs/screenshots/editor.png)
-
-### OTP 与屏幕扫码
-
-![OTP 配置与扫码入口](docs/screenshots/otp-setup.png)
-
+[![Epassword 界面预览，点击体验交互演示](docs/screenshots/vault.png)](https://exp-tools.github.io/Epassword/)
 
 ## 开始使用
 
