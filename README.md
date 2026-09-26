@@ -8,13 +8,28 @@ The three-column interface is inspired by 1Password. Epassword is an independent
 
 [Installation](INSTALL.md) · [安装指南](INSTALL.zh-CN.md) · [Project Wiki](docs/wiki/Home.md) · [中文 Wiki](docs/wiki/Home-zh-CN.md)
 
+## Download 1.0
+
+First public release: [Epassword 1.0](https://github.com/EXP-Tools/Epassword/releases/tag/v1.0.0). Combined installers include the desktop app and Chrome extension files.
+
+| Platform | Download |
+| --- | --- |
+| Windows x64 | [Epassword-Setup-1.0.0-win-x64.zip](https://github.com/EXP-Tools/Epassword/releases/download/v1.0.0/Epassword-Setup-1.0.0-win-x64.zip) |
+| Mac Intel | [Epassword-Setup-1.0.0-mac-x64.zip](https://github.com/EXP-Tools/Epassword/releases/download/v1.0.0/Epassword-Setup-1.0.0-mac-x64.zip) |
+| Mac Apple Silicon | [Epassword-Setup-1.0.0-mac-arm64.zip](https://github.com/EXP-Tools/Epassword/releases/download/v1.0.0/Epassword-Setup-1.0.0-mac-arm64.zip) |
+
+[Chrome extension](https://github.com/EXP-Tools/Epassword/releases/download/v1.0.0/Epassword-Chrome-1.0.0.zip) · [SHA256SUMS.txt](https://github.com/EXP-Tools/Epassword/releases/download/v1.0.0/SHA256SUMS.txt)
+
+Extract the entire ZIP, then run install.cmd on Windows or bash install.command on Mac. Chrome activation and pairing remain manual. Mac packages are not Apple-notarized.
+
+
 ## Platform status
 
 | Platform | Status |
 | --- | --- |
 | Windows x64 | Built and tested locally |
-| macOS Intel / x64 | Implementation, packaging and CI configured; native verification pending |
-| macOS Apple Silicon / arm64 | Implementation, packaging and CI configured; native verification pending |
+| macOS Intel / x64 | Built and smoke-tested on macOS CI; physical-device QR/Excel validation pending |
+| macOS Apple Silicon / arm64 | Built and smoke-tested on macOS CI; physical-device QR/Excel validation pending |
 
 macOS requires version 12 or later for the bundled Electron runtime. Source builds must also meet the requirements of the installed Node.js version. Linux is not a supported target.
 
@@ -22,7 +37,7 @@ Windows and Mac use the same workbook format and master password. Copy your work
 
 ## Install desktop and Chrome extension together
 
-Download the matching Epassword-Setup ZIP from Actions artifacts, extract it, and run install.cmd (Windows) or bash install.command (Mac). The included runtime installs both components without Node.js. Follow the generated guide to enable the plugin in Chrome and pair it. [Combined installation](INSTALL.md#combined-desktop--chrome-installation-recommended).
+Download the matching Epassword-Setup ZIP from [Releases](https://github.com/EXP-Tools/Epassword/releases/tag/v1.0.0), extract it, and run install.cmd (Windows) or bash install.command (Mac). The included runtime installs both components without Node.js. Follow the generated guide to enable the plugin in Chrome and pair it. [Combined installation](INSTALL.md#combined-desktop--chrome-installation-recommended).
 
 ## Quick start
 
@@ -174,8 +189,10 @@ The renderer has Node integration disabled, context isolation and sandbox enable
 - [OTP setup URI format](https://github.com/google/google-authenticator/wiki/Key-Uri-Format)
 - [jsQR](https://github.com/cozmo/jsQR)
 
+## Remember your vault
+
+The desktop app remembers the last successfully opened or created vault path on this device. On restart, enter the master password to unlock it; the password is not saved. Click the file selector to choose another file if it has moved.
+
 ## Support the author
 
 Choose **打赏作者** in the desktop sidebar or Chrome extension popup to view Alipay and WeChat donation codes. Images are bundled for offline use; donations are optional.
-
-The desktop app remembers the last successfully opened or created vault path on this device. On restart, enter the master password to unlock it; the password is not saved. Click the file selector to choose another file if it has moved.

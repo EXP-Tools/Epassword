@@ -6,7 +6,7 @@ This guide has separate paths for human users and AI agents. Read [README.md](RE
 
 ## Combined desktop + Chrome installation (recommended)
 
-Download **Epassword-Setup-1.2.0-win-x64.zip**, **Epassword-Setup-1.2.0-mac-x64.zip**, or **Epassword-Setup-1.2.0-mac-arm64.zip** from Actions artifacts. Extract the entire ZIP into a temporary/download folder, close Epassword, then:
+Download **Epassword-Setup-1.0.0-win-x64.zip**, **Epassword-Setup-1.0.0-mac-x64.zip**, or **Epassword-Setup-1.0.0-mac-arm64.zip** from [Release 1.0](https://github.com/EXP-Tools/Epassword/releases/tag/v1.0.0). Extract the entire ZIP into a temporary/download folder, close Epassword, then:
 
 - Windows: double-click **install.cmd**.
 - Mac: run **bash install.command** in the extracted directory (or double-click the executable launcher).

@@ -8,6 +8,21 @@
 
 Epassword 使用独立品牌，不关联 1Password 服务。已添加 Windows x64、macOS Intel（x64）和 Apple Silicon（arm64）支持。Windows 已实测；Mac 构建入口及自动化流程已准备，尚待 Mac 实机验证。Linux 暂不作为支持目标。
 
+## 下载 1.0
+
+首次公开版本：[Epassword 1.0](https://github.com/EXP-Tools/Epassword/releases/tag/v1.0.0)。推荐一体安装包，同时安装桌面应用与 Chrome 插件文件。
+
+| 平台 | 下载 |
+| --- | --- |
+| Windows x64 | [Epassword-Setup-1.0.0-win-x64.zip](https://github.com/EXP-Tools/Epassword/releases/download/v1.0.0/Epassword-Setup-1.0.0-win-x64.zip) |
+| Mac Intel | [Epassword-Setup-1.0.0-mac-x64.zip](https://github.com/EXP-Tools/Epassword/releases/download/v1.0.0/Epassword-Setup-1.0.0-mac-x64.zip) |
+| Mac Apple Silicon | [Epassword-Setup-1.0.0-mac-arm64.zip](https://github.com/EXP-Tools/Epassword/releases/download/v1.0.0/Epassword-Setup-1.0.0-mac-arm64.zip) |
+
+[Chrome 插件](https://github.com/EXP-Tools/Epassword/releases/download/v1.0.0/Epassword-Chrome-1.0.0.zip) · [SHA256SUMS.txt](https://github.com/EXP-Tools/Epassword/releases/download/v1.0.0/SHA256SUMS.txt)
+
+完整解压后，Windows 运行 install.cmd，Mac 运行 bash install.command。Chrome 仍需在扩展管理页手动启用并配对。Mac 包未经 Apple 公证。
+
+
 ## 开始使用
 
 完整安装流程见 **[INSTALL.zh-CN.md](INSTALL.zh-CN.md)**，分别提供人类用户和 AI 的安装、验证、打包与排错步骤。
@@ -169,14 +184,16 @@ Chrome 开发者模式加载 extension 文件夹，再在桌面端设置中生�
 
 ## 桌面与插件一体安装
 
-下载 Actions 中对应平台的 Epassword-Setup ZIP，完整解压后运行 install.cmd（Windows）或 bash install.command（Mac）。安装包自带运行时，无需 Node.js，同时安装桌面程序与插件文件，再按指引在 Chrome 中启用并配对。[安装说明](INSTALL.zh-CN.md)。
+从 [Release 1.0](https://github.com/EXP-Tools/Epassword/releases/tag/v1.0.0) 下载对应平台的 Epassword-Setup ZIP，完整解压后运行 install.cmd（Windows）或 bash install.command（Mac）。安装包自带运行时，无需 Node.js，同时安装桌面程序与插件文件，再按指引在 Chrome 中启用并配对。[安装说明](INSTALL.zh-CN.md)。
 
 ## AI 与程序 API
 
 支持独立、限时、限网站的本机程序授权，查询匹配账号并读取指定凭据用于填充。锁定密码库立即撤销 API Token。附带 Playwright 填充助手，只向调用者返回填充状态。[中文 API 文档](docs/API.zh-CN.md) · [OpenAPI](docs/openapi.json)。
 
+## 记住密码库路径
+
+桌面应用会记住本机最后一次成功打开或创建的密码库路径，重启后输入主密码即可解锁，不保存主密码。文件移动后，可点击文件选择框重新定位。
+
 ## 打赏作者
 
 桌面侧栏与 Chrome 插件弹窗均提供 **打赏作者** 菜单，显示支付宝收款码和微信赞赏码。图片随应用打包，可离线查看，打赏完全自愿。
-
-桌面应用会记住本机最后一次成功打开或创建的密码库路径，重启后输入主密码即可解锁，不保存主密码。文件移动后，可点击文件选择框重新定位。

@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Epassword",
-  "version": "1.2.0",
+  "version": "1.0.0",
   "minimum_chrome_version": "120",
   "description": "Fill matching website logins and save registration passwords to your local Epassword Excel vault.",
   "permissions": [
