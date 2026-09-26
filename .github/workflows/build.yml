@@ -52,6 +52,9 @@ jobs:
       - name: Test encrypted item sharing
         if: matrix.platform == 'win'
         run: npm run test:share
+      - name: Test LAN sharing and password history
+        if: matrix.platform == 'win'
+        run: npm run test:lan
       - name: Package local app
         run: npm run pack
       - name: Smoke test packaged app

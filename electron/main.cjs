@@ -9,6 +9,8 @@ const path=require('node:path');
 const {randomUUID}=require('node:crypto');
 const {generatePassword}=require('./generator.cjs');
 const {Vault}=require('./vault.cjs');
+const {receivedItem}=require('./history.cjs');
+const {LanShare,discover}=require('./lan.cjs');
 const vault=new Vault();let win,idle,clipTimer,copied;
 const {ProgramApi}=require('./program-api.cjs');
 const programApi=new ProgramApi({vault});
@@ -37,8 +39,16 @@ const browserBridge=new BrowserBridge({
  changed:()=>{if(win&&!win.isDestroyed())win.webContents.send('vault-changed');}
 });
 const transfer=require('./transfer.cjs').transferHandlers({vault,dialog,getWindow:()=>win,requireUnlocked,touch,mutate,putClipboard});
+const lan=new LanShare({
+ changed:status=>{if(win&&!win.isDestroyed())win.webContents.send('lan-changed',status);},
+ receive:(items,isActive)=>{const generation=vault.generation;return mutate(async()=>{
+  if(!isActive())throw Error('连接已关闭');
+  const now=new Date().toISOString();await vault.save([...vault.items,...items.map(i=>receivedItem(i,now))]);
+  if(win&&!win.isDestroyed())win.webContents.send('vault-changed');
+ },generation);}
+});
 function clearClip(){clearTimeout(clipTimer);if(copied&&clipboard.readText()===copied)clipboard.clear();copied=null;}
-function lock(){transfer.clear();clearTimeout(idle);programApi.revokeAll();vault.lock();clearClip();if(win&&!win.isDestroyed())win.webContents.send('locked');}
+function lock(){lan.stop();transfer.clear();clearTimeout(idle);programApi.revokeAll();vault.lock();clearClip();if(win&&!win.isDestroyed())win.webContents.send('locked');}
 function touch(){clearTimeout(idle);if(vault.items)idle=setTimeout(lock,5*60*1000);}
 function requireUnlocked(){if(!vault.items)throw Error('请先解锁密码库');}
 function putClipboard(text,timeout=30000){clearClip();clipboard.writeText(text);copied=text;clipTimer=setTimeout(clearClip,timeout);touch();}
@@ -68,9 +78,31 @@ async function scanOtp(mode){
 }
 const channels={
  ...transfer.channels,
+ 'lan-start':()=>{requireUnlocked();touch();return lan.start();},
+ 'lan-connect':(_,options)=>{requireUnlocked();touch();return lan.connect(options?.ip,Number(options?.port));},
+ 'lan-discover':()=>{requireUnlocked();touch();return discover();},
+ 'lan-status':()=>{requireUnlocked();return lan.status();},
+ 'lan-stop':()=>lan.stop(),
+ 'lan-confirm':(_,code)=>{requireUnlocked();touch();lan.confirm(code);},
+ 'lan-offer':(_,ids)=>{requireUnlocked();touch();if(!Array.isArray(ids)||!ids.length||ids.length>100)throw Error('请选择 1–100 个项目');const selected=new Set(ids),items=vault.items.filter(i=>selected.has(i.id)&&i.deleted!=='true');if(items.length!==selected.size)throw Error('项目已变化，请重新选择');lan.offer(items);},
+ 'lan-accept':(_,options)=>{requireUnlocked();touch();lan.accept(options?.id,options?.accept===true);},
+ 'item-action':(_,options)=>mutate(async()=>{
+  const item=vault.items.find(i=>i.id===options?.id);if(!item)throw Error('项目不存在');
+  const now=new Date().toISOString();let items;
+  if(options.action==='duplicate'){const copy=receivedItem(item,now);copy.title=item.title+'（副本）';copy.created=now;copy.archived='false';copy.deleted='false';items=[...vault.items,copy];}
+  else if(options.action==='move'){if(!['登录信息','安全笔记','信用卡','身份信息'].includes(options.category))throw Error('分类无效');items=vault.items.map(i=>i.id===item.id?{...i,category:options.category,updated:now}:i);}
+  else if(options.action==='archive'){items=vault.items.map(i=>i.id===item.id?{...i,archived:i.archived==='true'?'false':'true',updated:now}:i);}
+  else if(options.action==='delete'){
+   const generation=vault.generation;
+   const result=await dialog.showMessageBox(win,{type:'warning',title:'彻底删除项目',message:'彻底删除「'+item.title+'」及其密码历史？',detail:'此操作无法在应用中撤销。已有导出文件和旧备份仍可能保留此项目。',buttons:['取消','彻底删除'],defaultId:0,cancelId:0,noLink:true});
+   requireUnlocked();if(generation!==vault.generation)throw Error('密码库已切换');if(result.response!==1)return vault.items;
+   items=vault.items.filter(i=>i.id!==item.id);
+  }else throw Error('无效操作');
+  await vault.save(items);touch();return vault.items;
+ }),
  'choose':async(_,mode)=>{if(mode==='create'){const r=await dialog.showSaveDialog(win,{title:'创建 Excel 密码库',defaultPath:'Epassword.xlsx',filters:[{name:'Excel 密码库',extensions:['xlsx']}]});return r.canceled?null:r.filePath;}const r=await dialog.showOpenDialog(win,{filters:[{name:'Excel 密码库',extensions:['xlsx']}],properties:['openFile']});return r.canceled?null:r.filePaths[0];},
  'unlock':async(_,p)=>{if(vault.items)throw Error('请先锁定当前密码库'); const items=await vault[p.mode==='create'?'create':'open'](p.path,p.password);touch();return {items,path:vault.path};},
- 'save':(_,item)=>mutate(async()=>{const now=new Date().toISOString();const old=vault.items.find(i=>i.id===item.id);if(old&&old.updated!==item.updated)throw Error('项目已更新，请重新打开后编辑');const value={...item,id:old?.id||randomUUID(),created:old?.created||now,updated:now};const items=old?vault.items.map(i=>i.id===old.id?value:i):[...vault.items,value];await vault.save(items);touch();return items;}),
+ 'save':(_,item)=>mutate(async()=>{const now=new Date().toISOString();const old=vault.items.find(i=>i.id===item.id);if(old&&old.updated!==item.updated)throw Error('项目已更新，请重新打开后编辑');const value={...item,id:old?.id||randomUUID(),created:old?.created||now,updated:now};const items=old?vault.items.map(i=>i.id===old.id?value:i):[...vault.items,value];await vault.save(items);touch();return vault.items;}),
  'api-create':(_,options)=>{requireUnlocked();touch();return programApi.createClient(options);},
  'api-status':()=>{requireUnlocked();return programApi.status();},
  'api-revoke':(_,id)=>{requireUnlocked();programApi.revoke(id);},
@@ -87,7 +119,7 @@ const channels={
  'otp-scan':(_,mode)=>scanOtp(mode),
  'screen-settings':async()=>{requireUnlocked();if(platform.isMac)await shell.openExternal('x-apple.systempreferences:com.apple.preference.security?Privacy_ScreenCapture');},
  'copy':(_,text)=>{if(!vault.items||typeof text!=='string'||text.length>30000)throw Error('无法复制');clearClip();clipboard.writeText(text);copied=text;clipTimer=setTimeout(clearClip,30000);touch();},
- 'change-password':(_,p)=>mutate(async()=>{if(p.current!==vault.password)throw Error('当前主密码错误');await vault.save(vault.items,p.next);programApi.revokeAll();touch();}),
+ 'change-password':(_,p)=>mutate(async()=>{if(p.current!==vault.password)throw Error('当前主密码错误');await vault.save(vault.items,p.next);programApi.revokeAll();lan.stop('主密码已修改，连接已关闭');touch();}),
  'reveal':()=>{if(vault.path)shell.showItemInFolder(vault.path);},
  'website':async(_,url)=>{if(!vault.items)throw Error('请先解锁');const u=new URL(url);if(!['https:','http:'].includes(u.protocol))throw Error('只允许 HTTP / HTTPS 链接');await shell.openExternal(u.href);}
 };

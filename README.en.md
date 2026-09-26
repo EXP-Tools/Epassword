@@ -25,6 +25,8 @@ Current release: [Epassword 1.2](https://github.com/EXP-Tools/Epassword/releases
 Extract the entire ZIP, then run install.cmd on Windows or bash install.command on Mac. Chrome activation and pairing remain manual. Mac packages are not Apple-notarized.
 
 
+Current source adds consent-based LAN sharing, item context menus and encrypted password history. See the [user guide](docs/USER-GUIDE.en.md). These changes are not included in the existing 1.2 release.
+
 ## Screenshots and user guide
 
 [Illustrated user guide](docs/USER-GUIDE.en.md) · [中文用户手册](docs/USER-GUIDE.md)

@@ -177,3 +177,41 @@ Choose 打赏作者 in the desktop sidebar or extension and scan with Alipay or 
 | API authorization expired | Unlock if needed and authorize again |
 
 To regenerate screenshots, run node scripts/capture-screenshots.cjs in an isolated development environment. It uses a fictional workbook and profile under test-results.
+
+## LAN sharing (new in current source)
+
+![LAN pairing and receipt confirmation](screenshots/lan-sharing.png)
+
+Unlock a vault on each computer running the updated Epassword on the same LAN.
+
+1. On A, open 局域网分享 and click 临时开启服务.
+2. On B, search for the service or enter A's displayed IPv4 address and TCP port.
+3. Compare the **entire six-digit device verification code** in person or over a trusted call. Both users must confirm the matching code within 60 seconds. Disconnect if it differs.
+4. Either user can select multiple local items (or select all) and request a push. Each push supports up to 100 items / 16 MB.
+5. The recipient sees item titles and categories and must confirm before credentials are transmitted. Rejecting does not transfer password contents. Neither device can browse or pull arbitrary items from the other vault.
+6. Received items are appended with new IDs and the current last-edited time; existing entries are not overwritten. Current credentials, custom fields and OTP configurations are shared; password history is excluded.
+
+The service closes after five minutes without pairing, or five minutes without a push request/completion after pairing. Discovery, status reads and ordinary network traffic do not extend this deadline. The top-right disconnect button closes it manually; 收起 only dismisses the window. Vault locking, master-password changes, sleep and exit also disconnect. One peer per temporary service is supported.
+
+Discovery uses UDP 29745; encrypted transfers use the temporary TCP port shown in the UI. Allow Epassword through the private-network firewall. Guest Wi-Fi isolation, routed subnets or blocked broadcasts can prevent discovery; try direct IP entry. LAN IPv4 only, with no public relay. Service discovery exposes device names and addresses; item traffic is encrypted after mutual verification.
+
+## Item context menu (new in current source)
+
+Right-click an item or focus it and press Shift+F10:
+
+- Copy item creates a new entry with current values, excluding password history.
+- Move category changes its category while preserving fields.
+- Archive / unarchive changes its archive state.
+- Permanently delete requires confirmation and removes the item and its history from the current vault. Existing backups and exports may still contain previous data.
+
+## Password history (new in current source)
+
+![Password history](screenshots/password-history.png)
+
+Click 查看历史密码 beside the main password or a custom Password field in the detail view or editor. Entries are dated, masked by default and can be revealed or copied individually. Only successfully saved changes are recorded; editing a title does not duplicate password versions.
+
+Only item passwords and custom Password fields are tracked. Master, temporary sharing and export passwords, security answers and OTP secrets are excluded. Earlier versions cannot be reconstructed; saving an old item preserves its then-current value and known edit timestamp. There is a limit of 10000 history entries per item; exceeding it rejects the save instead of silently discarding history.
+
+The Password History (密码历史) worksheet is encrypted with the workbook and recoverable directly in Excel. Excel import/export preserves history, including in unencrypted exports. Encrypted single-item sharing and LAN sharing send current values only.
+
+Use the updated app when editing history-enabled workbooks; older app versions do not preserve the new history worksheet when saving.

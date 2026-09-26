@@ -25,7 +25,8 @@
     "test:api": "node tests/api-desktop.cjs",
     "test:transfer": "node tests/transfer-desktop.cjs",
     "test:search": "node tests/search-desktop.cjs",
-    "test:share": "node tests/share-desktop.cjs"
+    "test:share": "node tests/share-desktop.cjs",
+    "test:lan": "node tests/lan-desktop.cjs"
   },
   "dependencies": {
     "exceljs": "4.4.0",

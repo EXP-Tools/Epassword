@@ -3,7 +3,7 @@ function extraDetails(item){
  if(!item.fields?.length)return '';
  return `<div class="card extra-details">${item.fields.map(field=>{
   const secret=['password','question'].includes(field.type);
-  return `<div class="field" data-extra-id="${esc(field.id)}"><div class="field-data extra-copy" role="button" tabindex="0" title="点击复制" aria-label="复制${esc(field.label)}"><label>${esc(field.label)} · ${extraTypes[field.type]}</label><div class="value ${secret?'secret':''} ${field.type==='otp'?'otp-code':''}">${field.type==='otp'?'------':secret?'••••••••••••':esc(field.value||'—')}</div>${field.type==='otp'?'<small class="otp-countdown">正在获取验证码…</small>':''}</div>${secret?'<button type="button" class="extra-reveal">显示</button>':''}<button type="button" class="extra-copy-button">复制</button>${field.type==='url'?'<button type="button" class="extra-open">打开 ↗</button>':''}</div>`;
+  return `<div class="field" data-extra-id="${esc(field.id)}"><div class="field-data extra-copy" role="button" tabindex="0" title="点击复制" aria-label="复制${esc(field.label)}"><label>${esc(field.label)} · ${extraTypes[field.type]}</label><div class="value ${secret?'secret':''} ${field.type==='otp'?'otp-code':''}">${field.type==='otp'?'------':secret?'••••••••••••':esc(field.value||'—')}</div>${field.type==='otp'?'<small class="otp-countdown">正在获取验证码…</small>':''}</div>${secret?'<button type="button" class="extra-reveal">显示</button>':''}${field.type==='password'?'<button type="button" class="extra-history">查看历史密码</button>':''}<button type="button" class="extra-copy-button">复制</button>${field.type==='url'?'<button type="button" class="extra-open">打开 ↗</button>':''}</div>`;
  }).join('')}</div>`;
 }
 function bindExtraDetails(item){
@@ -12,6 +12,7 @@ function bindExtraDetails(item){
   const copy=()=>run(async()=>{if(field.type==='otp')await call('otp-copy',item.id,field.id);else await call('copy',field.value);toast(`${field.label}已复制`);});
   row.querySelector('.extra-copy').onclick=copy;row.querySelector('.extra-copy-button').onclick=copy;
   row.querySelector('.extra-copy').onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();copy();}};
+  row.querySelector('.extra-history')?.addEventListener('click',()=>passwordHistory(item,'field:'+field.id));
   const reveal=row.querySelector('.extra-reveal');if(reveal)reveal.onclick=()=>{revealed=!revealed;row.querySelector('.value').textContent=revealed?field.value:'••••••••••••';reveal.textContent=revealed?'隐藏':'显示';};
   const open=row.querySelector('.extra-open');if(open)open.onclick=()=>run(()=>call('website',field.value));
  });
@@ -31,6 +32,7 @@ setInterval(refreshOtp,1000);
 function mountExtraEditor(modal,item){
  const section=document.createElement('section');section.className='extra-editor';
  section.innerHTML='<h3>更多信息</h3><div class="extra-rows"></div><div class="row"><select class="extra-type" aria-label="新增字段类型">'+Object.entries(extraTypes).map(([key,value])=>`<option value="${key}">${value}</option>`).join('')+'</select><button type="button" class="add-extra">＋ 添加更多</button></div><p class="generator-hint">可添加多个字段和多个一次性密码。</p>';
+ section.historyItem=item;
  const form=modal.querySelector('form');form.insertBefore(section,form.querySelector('.actions'));
  section.querySelector('.add-extra').onclick=()=>addExtraRow(section,{type:section.querySelector('.extra-type').value});
  (item.fields||[]).forEach(field=>addExtraRow(section,field));
@@ -41,6 +43,7 @@ function addExtraRow(section,field){
  const sensitive=['password','question','otp'].includes(field.type);const multiline=['text','address'].includes(field.type);
  row.innerHTML=`<div class="row"><span class="extra-kind">${extraTypes[field.type]}</span><button type="button" class="remove-extra danger">移除</button></div><label>字段名称${field.type==='question'?' / 安全问题':''}</label><input class="extra-label" aria-label="字段名称" maxlength="200" required value="${esc(field.label||extraTypes[field.type])}"><label>${field.type==='otp'?'设置密钥或 otpauth://totp 链接':field.type==='question'?'答案':'内容'}</label><div class="row">${multiline?`<textarea class="extra-value" aria-label="字段内容" maxlength="30000">${esc(field.value||'')}</textarea>`:`<input class="extra-value" aria-label="字段内容" type="${sensitive?'password':field.type==='date'?'date':field.type==='email'?'email':field.type==='phone'?'tel':'text'}" autocomplete="off" maxlength="${field.type==='otp'?4096:30000}" ${field.type==='otp'?'required':''} value="${esc(field.value||'')}">`}${sensitive?'<button type="button" class="toggle-extra">显示</button>':''}</div>${field.type==='otp'?'<div class="actions otp-actions"><button type="button" class="scan-screen">▣ 扫描屏幕二维码</button><button type="button" class="scan-image">导入二维码图片</button><button type="button" class="check-otp">检查配置</button></div><p class="generator-hint">手动密钥默认 SHA1 / 6 位 / 30 秒；二维码链接保留算法、位数和周期。扫码时窗口会暂时隐藏，请先将二维码显示在屏幕上。</p><div class="scan-result" role="status"></div>':''}`;
  section.querySelector('.extra-rows').append(row);
+ if(field.type==='password'){const b=document.createElement('button');b.type='button';b.textContent='查看历史密码';b.className='extra-edit-history';b.onclick=()=>passwordHistory(section.historyItem,'field:'+row.dataset.fieldId);row.append(b);}
  row.querySelector('.remove-extra').onclick=()=>row.remove();
  const toggle=row.querySelector('.toggle-extra');if(toggle)toggle.onclick=()=>{const input=row.querySelector('.extra-value');input.type=input.type==='password'?'text':'password';toggle.textContent=input.type==='password'?'显示':'隐藏';};
  if(field.type==='otp'){

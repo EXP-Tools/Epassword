@@ -25,6 +25,8 @@ Epassword 使用独立品牌，不关联 1Password 服务。已添加 Windows x6
 完整解压后，Windows 运行 install.cmd，Mac 运行 bash install.command。Chrome 仍需在扩展管理页手动启用并配对。Mac 包未经 Apple 公证。
 
 
+当前源码新增局域网确认推送、项目右键菜单及加密密码历史，操作方法见[用户手册](docs/USER-GUIDE.md)。这些新增功能尚未包含在已有的 1.2 安装包中。
+
 ## 界面预览与用户手册
 
 [图文用户使用手册](docs/USER-GUIDE.md) · [English user guide](docs/USER-GUIDE.en.md)

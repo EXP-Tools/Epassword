@@ -1,3 +1,4 @@
+const {receivedItem}=require('./history.cjs');
 const fs=require('node:fs/promises');
 const {randomUUID}=require('node:crypto');
 const {encode,decode}=require('./vault.cjs');
@@ -53,7 +54,7 @@ function transferHandlers({vault,dialog,getWindow,requireUnlocked,touch,mutate,p
    const ids=new Set(options.ids),selected=pending.items.filter(i=>ids.has(i.id));
    if(selected.length!==ids.size)throw Error('选择的项目无效');
    // Append as new records; never replace existing IDs/accounts.
-   const imported=selected.map(i=>({...i,id:randomUUID(),fields:(i.fields||[]).map(f=>({...f,id:randomUUID()}))}));
+   const imported=selected.map(i=>receivedItem(i,new Date().toISOString(),{history:true}));
    await vault.save([...vault.items,...imported]);pending=null;touch();
    return {items:vault.items,count:imported.length};
   })
