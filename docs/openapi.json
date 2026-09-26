@@ -112,7 +112,8 @@
                 "properties": {},
                 "required": [],
                 "additionalProperties": false
-              }
+              },
+              "example": {}
             }
           }
         },
@@ -142,6 +143,23 @@
                     "client"
                   ],
                   "additionalProperties": false
+                },
+                "example": {
+                  "apiVersion": "1",
+                  "unlocked": true,
+                  "client": {
+                    "id": "11111111-1111-4111-8111-111111111111",
+                    "name": "Local automation",
+                    "origins": [
+                      "https://example.com"
+                    ],
+                    "scopes": [
+                      "logins:list",
+                      "credentials:read"
+                    ],
+                    "expiresAt": "2026-09-26T10:00:00.000Z",
+                    "lastUsedAt": "2026-09-26T09:01:00.000Z"
+                  }
                 }
               }
             }
@@ -152,6 +170,24 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "invalid_json": {
+                    "value": {
+                      "error": {
+                        "code": "invalid_json",
+                        "message": "Invalid JSON body."
+                      }
+                    }
+                  },
+                  "invalid_request": {
+                    "value": {
+                      "error": {
+                        "code": "invalid_request",
+                        "message": "Unexpected request field."
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -162,6 +198,16 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "unauthorized": {
+                    "value": {
+                      "error": {
+                        "code": "unauthorized",
+                        "message": "Token invalid, expired or revoked; authorize in Epassword again."
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -172,6 +218,16 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "source_forbidden": {
+                    "value": {
+                      "error": {
+                        "code": "source_forbidden",
+                        "message": "Use a local native HTTP client; browser origins are not accepted."
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -182,6 +238,16 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "not_found": {
+                    "value": {
+                      "error": {
+                        "code": "not_found",
+                        "message": "Unknown API endpoint."
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -192,6 +258,16 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "method_not_allowed": {
+                    "value": {
+                      "error": {
+                        "code": "method_not_allowed",
+                        "message": "Use POST with a JSON body."
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -202,6 +278,16 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "body_too_large": {
+                    "value": {
+                      "error": {
+                        "code": "body_too_large",
+                        "message": "Request body exceeds 8 KB."
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -212,6 +298,16 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "unsupported_media_type": {
+                    "value": {
+                      "error": {
+                        "code": "unsupported_media_type",
+                        "message": "Use application/json."
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -222,6 +318,16 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "locked": {
+                    "value": {
+                      "error": {
+                        "code": "locked",
+                        "message": "Unlock the vault in Epassword."
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -232,6 +338,16 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "rate_limited": {
+                    "value": {
+                      "error": {
+                        "code": "rate_limited",
+                        "message": "Limit: 60 requests per minute per client."
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -242,6 +358,16 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "internal_error": {
+                    "value": {
+                      "error": {
+                        "code": "internal_error",
+                        "message": "API request failed."
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -270,6 +396,9 @@
                   "url"
                 ],
                 "additionalProperties": false
+              },
+              "example": {
+                "url": "https://example.com/login"
               }
             }
           }
@@ -314,6 +443,16 @@
                     "items"
                   ],
                   "additionalProperties": false
+                },
+                "example": {
+                  "origin": "https://example.com",
+                  "items": [
+                    {
+                      "id": "22222222-2222-4222-8222-222222222222",
+                      "title": "Example account",
+                      "username": "demo@example.com"
+                    }
+                  ]
                 }
               }
             }
@@ -324,6 +463,32 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "invalid_json": {
+                    "value": {
+                      "error": {
+                        "code": "invalid_json",
+                        "message": "Invalid JSON body."
+                      }
+                    }
+                  },
+                  "invalid_request": {
+                    "value": {
+                      "error": {
+                        "code": "invalid_request",
+                        "message": "Unexpected request field."
+                      }
+                    }
+                  },
+                  "invalid_url": {
+                    "value": {
+                      "error": {
+                        "code": "invalid_url",
+                        "message": "A full HTTPS URL is required."
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -334,6 +499,16 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "unauthorized": {
+                    "value": {
+                      "error": {
+                        "code": "unauthorized",
+                        "message": "Token invalid, expired or revoked; authorize in Epassword again."
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -344,6 +519,32 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "source_forbidden": {
+                    "value": {
+                      "error": {
+                        "code": "source_forbidden",
+                        "message": "Use a local native HTTP client; browser origins are not accepted."
+                      }
+                    }
+                  },
+                  "origin_not_allowed": {
+                    "value": {
+                      "error": {
+                        "code": "origin_not_allowed",
+                        "message": "This client is not authorized for this exact HTTPS origin."
+                      }
+                    }
+                  },
+                  "scope_required": {
+                    "value": {
+                      "error": {
+                        "code": "scope_required",
+                        "message": "Missing scope: logins:list"
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -354,6 +555,16 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "not_found": {
+                    "value": {
+                      "error": {
+                        "code": "not_found",
+                        "message": "Unknown API endpoint."
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -364,6 +575,16 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "method_not_allowed": {
+                    "value": {
+                      "error": {
+                        "code": "method_not_allowed",
+                        "message": "Use POST with a JSON body."
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -374,6 +595,16 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "body_too_large": {
+                    "value": {
+                      "error": {
+                        "code": "body_too_large",
+                        "message": "Request body exceeds 8 KB."
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -384,6 +615,16 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "unsupported_media_type": {
+                    "value": {
+                      "error": {
+                        "code": "unsupported_media_type",
+                        "message": "Use application/json."
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -394,6 +635,16 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "locked": {
+                    "value": {
+                      "error": {
+                        "code": "locked",
+                        "message": "Unlock the vault in Epassword."
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -404,6 +655,16 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "rate_limited": {
+                    "value": {
+                      "error": {
+                        "code": "rate_limited",
+                        "message": "Limit: 60 requests per minute per client."
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -414,6 +675,16 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "internal_error": {
+                    "value": {
+                      "error": {
+                        "code": "internal_error",
+                        "message": "API request failed."
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -448,6 +719,10 @@
                   "itemId"
                 ],
                 "additionalProperties": false
+              },
+              "example": {
+                "url": "https://example.com/login",
+                "itemId": "22222222-2222-4222-8222-222222222222"
               }
             }
           }
@@ -481,6 +756,12 @@
                     "password"
                   ],
                   "additionalProperties": false
+                },
+                "example": {
+                  "itemId": "22222222-2222-4222-8222-222222222222",
+                  "origin": "https://example.com",
+                  "username": "demo@example.com",
+                  "password": "EXAMPLE_ONLY_NOT_A_REAL_PASSWORD"
                 }
               }
             }
@@ -491,6 +772,40 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "invalid_json": {
+                    "value": {
+                      "error": {
+                        "code": "invalid_json",
+                        "message": "Invalid JSON body."
+                      }
+                    }
+                  },
+                  "invalid_request": {
+                    "value": {
+                      "error": {
+                        "code": "invalid_request",
+                        "message": "Unexpected request field."
+                      }
+                    }
+                  },
+                  "invalid_url": {
+                    "value": {
+                      "error": {
+                        "code": "invalid_url",
+                        "message": "A full HTTPS URL is required."
+                      }
+                    }
+                  },
+                  "invalid_item_id": {
+                    "value": {
+                      "error": {
+                        "code": "invalid_item_id",
+                        "message": "An explicit itemId is required."
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -501,6 +816,16 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "unauthorized": {
+                    "value": {
+                      "error": {
+                        "code": "unauthorized",
+                        "message": "Token invalid, expired or revoked; authorize in Epassword again."
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -511,6 +836,32 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "source_forbidden": {
+                    "value": {
+                      "error": {
+                        "code": "source_forbidden",
+                        "message": "Use a local native HTTP client; browser origins are not accepted."
+                      }
+                    }
+                  },
+                  "origin_not_allowed": {
+                    "value": {
+                      "error": {
+                        "code": "origin_not_allowed",
+                        "message": "This client is not authorized for this exact HTTPS origin."
+                      }
+                    }
+                  },
+                  "scope_required": {
+                    "value": {
+                      "error": {
+                        "code": "scope_required",
+                        "message": "Missing scope: credentials:read"
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -521,6 +872,24 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "not_found": {
+                    "value": {
+                      "error": {
+                        "code": "not_found",
+                        "message": "Unknown API endpoint."
+                      }
+                    }
+                  },
+                  "login_not_found": {
+                    "value": {
+                      "error": {
+                        "code": "login_not_found",
+                        "message": "No active matching login."
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -531,6 +900,16 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "method_not_allowed": {
+                    "value": {
+                      "error": {
+                        "code": "method_not_allowed",
+                        "message": "Use POST with a JSON body."
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -541,6 +920,16 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "body_too_large": {
+                    "value": {
+                      "error": {
+                        "code": "body_too_large",
+                        "message": "Request body exceeds 8 KB."
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -551,6 +940,16 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "unsupported_media_type": {
+                    "value": {
+                      "error": {
+                        "code": "unsupported_media_type",
+                        "message": "Use application/json."
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -561,6 +960,16 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "locked": {
+                    "value": {
+                      "error": {
+                        "code": "locked",
+                        "message": "Unlock the vault in Epassword."
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -571,6 +980,16 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "rate_limited": {
+                    "value": {
+                      "error": {
+                        "code": "rate_limited",
+                        "message": "Limit: 60 requests per minute per client."
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -581,6 +1000,16 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "internal_error": {
+                    "value": {
+                      "error": {
+                        "code": "internal_error",
+                        "message": "API request failed."
+                      }
+                    }
+                  }
                 }
               }
             }
