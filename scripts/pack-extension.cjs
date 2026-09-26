@@ -11,6 +11,7 @@ const archiver=require('archiver');
   archive.pipe(output);
   for(const name of ['manifest.json','background.js','content.js','popup.html','popup.js','popup.css'])
    archive.file(path.resolve('extension',name),{name});
+  archive.directory(path.resolve('extension/assets'),'assets');
   archive.finalize().catch(reject);
  });
  console.log(target);

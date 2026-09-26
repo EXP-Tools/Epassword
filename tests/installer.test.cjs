@@ -30,8 +30,11 @@ test('combined install, stable extension path, upgrade backup and unrelated-fold
   assert.match(await fs.readFile(first.guidePath,'utf8'),/chrome:\/\/extensions/);
   assert.equal(first.extensionActivationRequired,true);
   await fs.writeFile(path.join(target,'app','user-file.txt'),'must survive upgrade');
+  await fs.mkdir(path.join(source,'extension/assets'));
+  await fs.copyFile(path.join(__dirname,'../extension/assets/sponsor-wechat.png'),path.join(source,'extension/assets/sponsor-wechat.png'));
   await fs.writeFile(path.join(source,'desktop',executable),'fixture v2');
   const second=await install(options);assert.equal(first.extensionPath,second.extensionPath);
+  assert.deepEqual(await fs.readFile(path.join(second.extensionPath,'assets/sponsor-wechat.png')),await fs.readFile(path.join(source,'extension/assets/sponsor-wechat.png')));
   assert.equal(await fs.readFile(path.join(target,'app',executable),'utf8'),'fixture v2');
   const previous=(await fs.readdir(target)).filter(name=>name.startsWith('previous-'));
   assert.equal(previous.length,1);

@@ -43,3 +43,18 @@ void run(async () => {
   const [tab]=await chrome.tabs.query({active:true,currentWindow:true});
   tabId=tab?.id;await refresh();
 });
+
+$('sponsor-open').onclick=()=>{$('sponsor-dialog').showModal();};
+$('sponsor-close').onclick=()=>{$('sponsor-dialog').close();};
+for(const method of ['alipay','wechat']){
+ $('sponsor-'+method).onclick=()=>{
+  const name=method==='alipay'?'支付宝':'微信';
+  $('sponsor-code').src='assets/sponsor-'+method+'.png';
+  $('sponsor-code').alt=method==='alipay'?'支付宝收款二维码':'微信赞赏码';
+  $('sponsor-instruction').textContent='使用'+name+'扫一扫';
+  for(const other of ['alipay','wechat']){
+   $('sponsor-'+other).setAttribute('aria-pressed',String(other===method));
+   $('sponsor-'+other).classList.toggle('secondary',other!==method);
+  }
+ };
+}

@@ -173,3 +173,7 @@ The renderer has Node integration disabled, context isolation and sandbox enable
 - [RFC 6238](https://www.rfc-editor.org/rfc/rfc6238)
 - [OTP setup URI format](https://github.com/google/google-authenticator/wiki/Key-Uri-Format)
 - [jsQR](https://github.com/cozmo/jsQR)
+
+## Support the author
+
+Choose **打赏作者** in the desktop sidebar or Chrome extension popup to view Alipay and WeChat donation codes. Images are bundled for offline use; donations are optional.

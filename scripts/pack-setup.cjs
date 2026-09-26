@@ -26,6 +26,7 @@ async function packSetup() {
   archive.file(path.join(root,launcher),{name:launcher,mode:platform==='win32'?0o644:0o755});
   for(const file of ['manifest.json','background.js','content.js','popup.html','popup.js','popup.css'])
    archive.file(path.join(root,'extension',file),{name:'extension/'+file});
+  archive.directory(path.join(root,'extension/assets'),'extension/assets');
   archive.finalize().catch(reject);
  });
  console.log(target);

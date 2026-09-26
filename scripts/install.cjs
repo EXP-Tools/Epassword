@@ -135,6 +135,7 @@ async function install(options={}) {
   await fs.cp(sourceApp,path.join(stage,'app'),{recursive:true,verbatimSymlinks:true});
   await fs.mkdir(path.join(stage,'chrome-extension'));
   for(const name of extensionFiles)await fs.copyFile(path.join(sourceExtension,name),path.join(stage,'chrome-extension',name));
+  if(await exists(path.join(sourceExtension,'assets')))await fs.cp(path.join(sourceExtension,'assets'),path.join(stage,'chrome-extension/assets'),{recursive:true});
   if(includeApi){
    await fs.mkdir(path.join(stage,'integrations'));
    for(const [source,destination]of integrationFiles)await fs.copyFile(path.join(sourceRoot,source),path.join(stage,'integrations',destination));
